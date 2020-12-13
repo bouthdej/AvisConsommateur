@@ -221,8 +221,10 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
 				i++;
 				
 			}
-			
-		return rate/i;
+			p.setRate(rate/i);
+this.modifyProduct(id, p)	;
+return rate/i;
+		
 		
 	}
 }
