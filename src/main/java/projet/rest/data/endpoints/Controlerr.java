@@ -23,13 +23,42 @@ import projet.rest.data.services.UserService;
 public class Controlerr {
 	@Autowired
 UserService service ;
+	@GetMapping("/")
+	public String returnindex() {
+	    return "/index";
+	}
+@GetMapping("/smartphone")
+	public String smartphone() {
+	    return "categorie/smartphone/smartphone";
+	}
+@GetMapping("/washmachine")
+public String Washingmaching() {
+    return "categorie/washmachine/washingmachine";
+}
+@GetMapping("/login")
+public String login() {
+    return "aa/login";
+}
+@GetMapping("/register")
+public String register() {
+    return "aa/register";
+}
+@GetMapping("/forgotpass")
+public String forgotpass() {
+    return "aa/forgot-password";
+}
+@GetMapping("/user")
+public String userindex() {
+    return "/user/userindex";
+}
 @GetMapping("/forms")
 public String addProduct(Model model ) {
 	ProductEntity p = new ProductEntity ();
 	model.addAttribute("product",p);
 	
-	return "forms/createproduct";
+	return "forms/addproduct";
 }
+
 @GetMapping("/Reviews")
 public String addReview(Model model ) {
 	AvisEntity a = new AvisEntity() ;
@@ -37,7 +66,7 @@ public String addReview(Model model ) {
 	ProductEntity p = new ProductEntity ();
 	model.addAttribute("product",p);
 	
-	return "Reviews/createavis";
+	return "Reviews/addreviews";
 }
 @PostMapping("/forms")
 public String registerSuccess(@ModelAttribute("product") ProductEntity product) {
