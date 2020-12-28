@@ -42,6 +42,7 @@ public ProductEntity createavis(@PathVariable("id") int i, @RequestBody AvisEnti
 
 }
 
+
 @GetMapping(path="/getAvis/{id}")
 
 public List<AvisEntity> getallavis(@PathVariable("id")int i)
@@ -50,5 +51,14 @@ return service.getAllAvisEntity(i)	;
 
 }
 
+@PostMapping(path ="/addlike/{id}/{userid}")
+public AvisEntity addlike(@PathVariable("id") int id, @PathVariable("userid") int userid ) {
+	 return service.addLike(id, userid);
 
+}
+@PostMapping(path ="/addDislike/{id}/{userid}")
+public AvisEntity addDislike(@PathVariable("id") int id, @PathVariable("userid") int userid ) {
+	 return service.addDisLike(id, userid);
+
+}
 }

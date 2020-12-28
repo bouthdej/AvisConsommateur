@@ -1,5 +1,8 @@
 package projet.rest.data.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +31,11 @@ public  class AvisEntity {
 	private int nblike;
 	private int nbdislike;
 	private float note;
+	private String comment;
+	private int userID;
+	private ArrayList<Integer> likedBy ;
+	private ArrayList<Integer> dislikedBy;
+
 	@JsonIgnore
 	@ManyToOne
 	private ProductEntity product;

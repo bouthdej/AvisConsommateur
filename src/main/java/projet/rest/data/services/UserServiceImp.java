@@ -197,7 +197,14 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
 	@Override
 	public ProductEntity createAvis(int id, AvisEntity a ) {
 		ProductEntity productEntity = getProductById(id);
+		float note;
+		note=(a.getCameraquality()+a.getQalityPrice()+a.getDesign())/3;
+		a.setNote(note);
 		a.setProduct(productEntity);
+		a.setLikedBy(new ArrayList<>());
+		a.getLikedBy().add(0);
+		a.setDislikedBy(new ArrayList<>());
+		a.getDislikedBy().add(0);
 		reposAvis.save(a);
 		
 		return productEntity;
@@ -217,14 +224,115 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
 		int i=0;
 		//if (p.getCategory().equalsIgnoreCase("smartphone"))
 			for(AvisEntity a : this.getAllAvisEntity(id)) {
-				rate=rate+((a.getCameraquality()+a.getDesign()+a.getQalityPrice()+a.getNote())/4);
+				rate=rate+a.getNote();
 				i++;
 				
 			}
 			p.setRate(rate/i);
-this.modifyProduct(id, p)	;
-return rate/i;
-		
+			this.modifyProduct(id, p)	;
+			return rate/i;
 		
 	}
+	
+	@Override
+	public AvisEntity getAvisById(int id) {
+Optional<AvisEntity> opt = reposAvis.findById(id);
+		
+	AvisEntity avisentity;
+		if (opt.isPresent())
+			avisentity = opt.get();
+		else
+			throw new NoSuchElementException("Avis with this id is not found");
+		return avisentity; 
+	}
+	
+	@Override
+	public AvisEntity modifyAvis(int id, AvisEntity newEntityAvis) {
+		AvisEntity oldavis = this.getAvisById(id);
+	       if (newEntityAvis.getNblike()!= 0 )
+	    	   oldavis.setNblike(newEntityAvis.getNblike());
+	       if (newEntityAvis.getNbdislike()!= 0 )
+	    	   oldavis.setNbdislike(newEntityAvis.getNbdislike());
+	       if (newEntityAvis.getComment()!= null )
+		    	   oldavis.setComment(newEntityAvis.getComment());
+		
+		   return reposAvis.save(oldavis);
+		
+	}
+
+
+	
+	public AvisEntity addLike(int id , int userid) {
+		AvisEntity a = this.getAvisById(id);
+		boolean testDislike = false,test = false;
+		
+		if (a.getDislikedBy()!=null) {
+			
+		for (int i : a.getDislikedBy()) {
+			if (userid==i) {
+				a.getDislikedBy().remove(i);
+				a.getLikedBy().add(i);
+				a.setNblike(a.getNblike()+1);
+				a.setNbdislike(a.getNbdislike()-1);
+				testDislike = true;
+				break;
+			}
+
+		}
+		}
+		
+		if (testDislike == false && a.getLikedBy()!=null) {
+			
+		for (int i : a.getLikedBy()) {
+			if (userid==i) {
+				a.getLikedBy().remove(i);
+				a.setNblike(a.getNblike()-1);
+				test = true;
+				break;
+			}
+		}
+		}
+		if (test==false && testDislike == false) {
+			a.getLikedBy().add(userid);
+			a.setNblike(a.getNblike()+1);
+		}
+			
+		return this.modifyAvis(id, a);
+	}
+	
+	public AvisEntity addDisLike(int id , int userid) {
+		AvisEntity a = this.getAvisById(id);
+		boolean testLike = false,test = false;
+		if (a.getLikedBy()!=null) {
+
+		for (int i : a.getLikedBy()) {
+			if (userid==i) {
+				a.getDislikedBy().add(i);
+				a.getLikedBy().remove(i);
+				a.setNblike(a.getNblike()-1);
+				a.setNbdislike(a.getNbdislike()+1);
+				testLike = true;
+				break;
+			}
+		}
+		}
+		if (testLike == false && a.getDislikedBy()!=null) {
+			
+		for (int i : a.getDislikedBy()) {
+			if (userid==i) {
+				a.getDislikedBy().remove(i);
+				a.setNbdislike(a.getNbdislike()-1);
+				test = true;
+				break;
+			}
+		}
+		}
+		if (test==false && testLike == false) {
+			a.getDislikedBy().add(userid);
+			a.setNbdislike(a.getNbdislike()+1);
+		}
+			
+		return this.modifyAvis(id, a);
+	}
+	
 }

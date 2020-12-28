@@ -145,7 +145,7 @@
                                     
                                     <form action="#" th:action="@{/Reviews}" method="post"  >
                                         <label>note: (between 0 and 5):</label><br>
-                                        <input type="range" min="0" max="5" value="3"class="note" id="note" th:value="${avis.note}" name="note">
+                                        <input type="range" min="0" max="5" value="3"class="note" id="note"  name="note">
                                         <label>Value: <span id="demo"></span></label><br><br>
                                         <hr>
                                         <label>QalityPrice: (between 0 and 5)</label>
@@ -157,11 +157,12 @@
                                         <input type="range" min="0" max="5" value="3"class="design" id="design" th:value="${avis.design}" name="design"><br><br>
                                         <hr>
                                         <label >Your comment</label><br>
-                                        <textarea id="comment" name="comment" placeholder="Write something.." required style="height:130px"></textarea><br>
+                                        <textarea id="comment" name="comment" placeholder="Write something.." required style="height:130px" th:value="${avis.comment}" ></textarea><br>
                                         
                                         <label >Id product</label><br>
                                         <input type="text" class="idproduct" id="idproduct" th:value="${product.idp}" name="idp" ><br><br>
-                                        
+                                        <label >Id User</label><br>
+                                        <input type="text" class="userID" id="userID" th:value="${avis.userID}" name="userID" ><br><br>
                                         <button type="submit" >register</button>
                             
                                         <script>
