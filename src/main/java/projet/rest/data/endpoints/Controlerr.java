@@ -27,17 +27,34 @@ UserService service ;
 	public String returnindex() {
 	    return "/index";
 	}
-@GetMapping("/smartphone")
+/*@GetMapping("/smartphone")
 	public String smartphone() {
 	    return "categorie/smartphone/smartphone";
 	}
 @GetMapping("/washmachine")
 public String Washingmaching() {
     return "categorie/washmachine/washingmachine";
+}*/
+@GetMapping("/Products")
+	public String AllProducts() {
+	    return "Other/products";
+	}
+
+
+@GetMapping("/Contact")
+public String Contact() {
+    return "Other/contact";
 }
-@GetMapping("/login")
+
+
+@GetMapping("/Login")
 public String login() {
-    return "aa/login";
+    return "Other/login";
+}
+
+@GetMapping("/Sign-up")
+public String SignUp() {
+    return "Other/Sign-up";
 }
 @GetMapping("/register")
 public String register() {
@@ -51,30 +68,31 @@ public String forgotpass() {
 public String userindex() {
     return "/user/userindex";
 }
-@GetMapping("/forms")
+
+@GetMapping("/add-product")
 public String addProduct(Model model ) {
 	ProductEntity p = new ProductEntity ();
 	model.addAttribute("product",p);
 	
-	return "forms/addproduct";
+	return "forms/add-product";
 }
 
-@GetMapping("/Reviews")
+@GetMapping("/add-review")
 public String addReview(Model model ) {
 	AvisEntity a = new AvisEntity() ;
 	model.addAttribute("avis",a);
 	ProductEntity p = new ProductEntity ();
 	model.addAttribute("product",p);
 	
-	return "Reviews/addreviews";
+	return "Reviews/add-review";
 }
-@PostMapping("/forms")
+@PostMapping("/add-product")
 public String registerSuccess(@ModelAttribute("product") ProductEntity product) {
 	service.createProduct(product);
 	return "forms/productcreated";
 }
 
-@PostMapping("/Reviews")
+@PostMapping("/add-review")
 public String ReviewSuccess(@ModelAttribute("avis") AvisEntity a , @ModelAttribute("product") ProductEntity p) {
 	/*service.createProduct(a);*/
 	int i =p.getIdp();
