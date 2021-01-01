@@ -96,5 +96,4 @@ public AvisEntity addlike(@PathVariable("id") int id, @PathVariable("userid") lo
 
  
 
-}
-}
+}}

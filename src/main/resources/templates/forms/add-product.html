@@ -95,10 +95,13 @@
 
                     <form action="#" th:action="@{/add-product}" method="post" th:object="${product}" id="contactForm" class="contactForm">
                       <div class="row">
-                        <div class="col-md-12"> 
-                          <div class="form-group">
-                           <input type="text" class="form-control" th:field="*{category}" name="category" id="category" placeholder="Name of category">
-                          
+                        <div class="col-md-12">                          
+            				
+            				<select class="form-control" th:field="${product.catname}" >
+                            <option value="0">select category</option>
+                            <option th:each="category : ${categories}" th:value="${category.Title}" th:text="${category.Title}"></option>
+                            </select>
+            				
                           </div>  
                         </div>
                         <div class="col-md-12">

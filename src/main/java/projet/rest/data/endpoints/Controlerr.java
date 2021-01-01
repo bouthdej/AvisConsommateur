@@ -1,5 +1,6 @@
 package projet.rest.data.endpoints;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import projet.rest.data.models.AvisEntity;
+import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
 import projet.rest.data.services.UserService;
 
@@ -73,7 +75,10 @@ public String userindex() {
 public String addProduct(Model model ) {
 	ProductEntity p = new ProductEntity ();
 	model.addAttribute("product",p);
-	
+	List<CategoryEntity> categories =  service.getAllCategories();
+	model.addAttribute("categories",categories);
+	CategoryEntity cat = new CategoryEntity ();
+	model.addAttribute("category",cat);
 	return "forms/add-product";
 }
 
@@ -108,6 +113,7 @@ public String ReviewSuccess(@ModelAttribute("avis") AvisEntity a , @ModelAttribu
 	p.setRate(service.rate(i));
 	return "Reviews/reviewcreated";
 }
+
 
 
 }

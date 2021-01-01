@@ -311,7 +311,8 @@
                         data-rateyo-rating="1"
                         data-rateyo-num-stars="5"
                         data-rateyo-score="4"></span>
-                        <span class='result mb-8' th:value="${avis.design}" id="design" name="design">0</span>
+                        <span class='result mb-8' >0</span>
+                        
                       </td>
                      
                     </tr>
@@ -536,21 +537,18 @@
   <script src="js/main.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-        <script>$(function () {
+        <script>
+        	var r;
+        	$(function () {
             $(".rateyo").rateYo().on("rateyo.change", function (e, data) {
               var rating = data.rating;
+              r =rating;
               
-              
-               // document.getElementById("percent").innerHTML=rating ; 
-              
-             
-              //$(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
               $(this).parent().find('.result').text(rating);
-
-             //document.getElementById('percent').innerHTML=document.getElementsByClassName('result').value(); 
              
                         });
           });
+        	
   </script>
     
   </body>
