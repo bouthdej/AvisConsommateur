@@ -93,7 +93,7 @@
                   <div class="contact-wrap w-100 p-md-5 p-4">
                     <h3 class="mb-4">Sign up</h3>
 
-                    <form method="POST" th:action="@{/Sign-up}" th:object="${user}" id="contactForm" class="contactForm">
+                    <form method="POST" th:action="@{/Sign-up}" th:object="${user}" id="contactForm" class="contactForm" name="fsignup" onsubmit="return valider()">
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
@@ -107,7 +107,8 @@
                         </div>
                            <div class="col-md-12"> 
                           <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="password"  placeholder="confirm password">
+                            <input type="password" class="form-control" name="confirm_password" id="confirm_password"  placeholder="confirm password" onkeyup="check_pass()"><br/>
+                            <span id="message"></span>
                           </div>
                         </div>
                         <div class="col-md-12"> 
@@ -123,12 +124,12 @@
                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
-                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}">
+                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}" value="">
                           </div>
                          </div>
                         <div class="col-md-12">
                           <div class="form-group">
-                            <input type="submit" value="Sign up" class="btn btn-primary sign-up">
+                            <input type="submit" name="submit" id="submit" value="Sign up" class="btn btn-primary sign-up">
                             <div class="submitting"></div>
                           </div>
                         </div>
@@ -253,6 +254,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script src="js/passwd.js"></script>
   </body>
 </html>
