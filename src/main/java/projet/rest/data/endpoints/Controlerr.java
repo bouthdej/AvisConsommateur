@@ -16,6 +16,7 @@ import lombok.Data;
 import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
+import projet.rest.data.models.UserEntity;
 import projet.rest.data.services.UserService;
 
 
@@ -48,15 +49,27 @@ public String Contact() {
     return "Other/contact";
 }
 
-
+@GetMapping("/add-categories")
+public String AddCategories(Model model) {
+	CategoryEntity c = new CategoryEntity() ;
+	model.addAttribute("Category",c);
+    return "forms/add-categories";
+}
 @GetMapping("/Login")
 public String login() {
     return "Other/login";
 }
 
 @GetMapping("/Sign-up")
-public String SignUp() {
-    return "Other/Sign-up";
+public String SignUp(Model model) {
+	UserEntity user = new UserEntity();
+	model.addAttribute("user",user);
+	return "Other/Sign-up";
+}
+@PostMapping("/Sign-up")
+public String UserregisterSuccess(@ModelAttribute("user") UserEntity user) {
+	service.createUserEntity(user);
+	return "Other/login";
 }
 @GetMapping("/register")
 public String register() {
@@ -94,6 +107,11 @@ public String addReview(Model model ) {
 @PostMapping("/add-product")
 public String registerSuccess(@ModelAttribute("product") ProductEntity product) {
 	service.createProduct(product);
+	return "forms/productcreated";
+}
+@PostMapping("/add-categories")
+public String registerSuccess(@ModelAttribute("Category") CategoryEntity Category) {
+	service.createCategory(Category);
 	return "forms/productcreated";
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Sign-Up</title>
     <meta charset="utf-8">
@@ -93,35 +93,39 @@
                   <div class="contact-wrap w-100 p-md-5 p-4">
                     <h3 class="mb-4">Sign up</h3>
 
-                    <form method="POST" id="contactForm" class="contactForm">
+                    <form method="POST" th:action="@{/Sign-up}" th:object="${user}" id="contactForm" class="contactForm">
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                        <input type="text" class="form-control" name="Username" id="username" placeholder="Username">
+                        <input type="text" class="form-control" name="nom" id="nom" th:field="*{nom}" placeholder="Username">
                           </div>
                         </div>
                          <div class="col-md-12"> 
                           <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="" placeholder="Password">
+                            <input type="password" class="form-control" name="password" id="password" th:field="*{password}" placeholder="Password">
                           </div>
                         </div>
                            <div class="col-md-12"> 
                           <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="" placeholder="confirm password">
+                            <input type="password" class="form-control" name="password" id="password"  placeholder="confirm password">
                           </div>
                         </div>
                         <div class="col-md-12"> 
                           <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                            <input type="email" class="form-control" name="email" id="email" th:field="*{email}" placeholder="Email">
                           </div>
                         </div>
                         <div class="col-md-12">
 
                           <div class="form-group">
-                           <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone">
+                           <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}" placeholder="Phone">
                           </div>
                         </div>
-                          
+                        <div class="col-md-12">
+                          <div class="form-group">
+                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}">
+                          </div>
+                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
                             <input type="submit" value="Sign up" class="btn btn-primary sign-up">
@@ -133,25 +137,18 @@
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch">
-                  <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
-                   
-                   
+                    <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
                            <br> 
                            <br>
                            <br>
-                           <div class="sign-up">
+                        <div class="sign-up">
                             <a class="btn btn-primary mt-5 " style=" background-color: #3B5998;  color: white;"><span class="fa fa-facebook"> </span>  Login with Facebook </a>
-
-                          
-                           
-
                             <a class="btn btn-primary mt-4" style="    background-color: #55ACEE;  color: white;"><span class="fa fa-twitter"></span> login with Twitter</a>
-
-                <a class="btn btn-primary mt-4" style="  background-color: #dd4b39; color: white;"><span class="fa fa-google"></span> login with Google +</a>
-                         </div>
+                			<a class="btn btn-primary mt-4" style="  background-color: #dd4b39; color: white;"><span class="fa fa-google"></span> login with Google +</a>
+                     	</div>
   
                          
-                          </div>
+                    </div>
                   
                     </div>
                    
@@ -160,8 +157,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+
     </section>
 
   

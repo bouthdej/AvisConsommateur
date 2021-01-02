@@ -92,8 +92,8 @@ public class UserServiceImp implements UserService {
             oldUser.setNom(newUser.getNom());
         if (newUser.getPrenom() != null)
             oldUser.setPrenom(newUser.getPrenom());
-        if (newUser.getDateOfBirth() != null)
-            oldUser.setDateOfBirth(newUser.getDateOfBirth());
+        if (newUser.getBirthDate() != null)
+            oldUser.setBirthDate(newUser.getBirthDate());
         if (newUser.getPermission() != null)
             oldUser.setPermission(newUser.getPermission());
         
