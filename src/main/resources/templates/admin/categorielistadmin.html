@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <title>list Categories</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,6 +20,19 @@
         <link rel="stylesheet" href="../css/flaticon.css">
         <link rel="stylesheet" href="../css/style.css">
 <body>
-list categories.......
+	<div align="center">
+		<h2 class="mb-4">List Categories</h2>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name of Category</th>
+			</tr>
+			<tr th:each ="Category : ${categories}" >
+				<td th:utext="${Category.id}" ></td>
+				<td th:utext="${Category.Title}" ></td>
+			</tr>
+		</table>
+		
+	</div>
 </body>
 </html>

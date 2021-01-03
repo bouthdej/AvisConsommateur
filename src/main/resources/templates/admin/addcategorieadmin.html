@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-        <title>add categories</title>
+        <title>add category</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
@@ -22,6 +22,22 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
 <body>
-add categories..dd
+	<div class="contact-wrap w-100 p-md-5 p-4">
+        <h3 class="mb-4">Add Category</h3>
+		<form action="#" th:action="@{/addcategorie}" method="post" th:object="${Category}" id="contactForm" class="contactForm">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                        	<input type="text" class="form-control" th:field="*{Title}" name="Title" id="Title" placeholder="Title of Categorie">
+                          </div>
+                        </div>        
+   
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input type="submit" value="Add category" class="btn btn-primary sign-up">
+                            <div class="submitting"></div>
+                          </div>
+                        </div>
+       </form>
+	</div>
 </body>
 </html>

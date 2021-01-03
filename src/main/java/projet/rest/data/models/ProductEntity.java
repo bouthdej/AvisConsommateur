@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,4 +40,9 @@ public class ProductEntity {
 	private CategoryEntity category;
 	private String catname;
 	private float rate;
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String img; 
+
+	private String description ;
 }

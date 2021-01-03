@@ -46,7 +46,7 @@ public UserEntity createuser(@RequestBody UserEntity entity) {
 
  
 
-
+/*
 @PostMapping(path ="/addproduct")
 
  
@@ -58,7 +58,7 @@ public ProductEntity createproduct(@RequestBody ProductEntity productEntity)
  
 
 }
-
+*/
  
 
 @PostMapping(path ="/addcategory")

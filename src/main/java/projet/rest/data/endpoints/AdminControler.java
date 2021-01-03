@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,12 +62,23 @@ public class AdminControler {
 	
 	/*Categories*/
 	@GetMapping("/categorielist")
-	public String AllCategoris() {
+	public String AllCategoris(Model model) {
+		List<CategoryEntity> categories =  service.getAllCategories();
+		model.addAttribute("categories",categories);
+		CategoryEntity Category = new CategoryEntity() ;
+		model.addAttribute("Category",Category);
 	    return "admin/categorielistadmin";
 	}
 	@GetMapping("/addcategorie")
-	public String AddCategories() {
+	public String AddCategories(Model model) {
+		CategoryEntity c = new CategoryEntity() ;
+		model.addAttribute("Category",c);
 	    return "admin/addcategorieadmin";
+	}
+	@PostMapping("/addcategorie")
+	public String registerSuccess(@ModelAttribute("Category") CategoryEntity Category, Model model) {
+		service.createCategory(Category);
+		return this.AllCategoris(model);
 	}
 	@GetMapping("/delcategorie")
 	public String DelCategories() {
@@ -88,11 +101,10 @@ public class AdminControler {
 	    return "admin/addproductadmin";
 	}
 	@PostMapping("/addproductadmin")
-	public String registerSuccess(@ModelAttribute("product") ProductEntity product) {
-		service.createProduct(product);
+	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
+		service.createProduct(catname,nom,marque,description,file);
 		return "forms/productcreated";
 	}
-	
 	@GetMapping("/delproduct")
 	public String DelProducts() {
 	    return "admin/delproductadmin";

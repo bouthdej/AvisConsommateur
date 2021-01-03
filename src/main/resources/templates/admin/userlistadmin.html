@@ -30,9 +30,10 @@
     </head>
     <body>
     <div align="center">
-		<h2> List Users :</h2>
+		<h2 class="mb-4"> List Users </h2>
 		<table border="1">
 			<tr>
+				<th>ID</th>
 				<th>Name</th>
 				<th>E-mail</th>
 				<th>Password</th>
@@ -41,6 +42,7 @@
 				<th>Permission</th>
 			</tr>
 			<tr th:each ="user : ${users}" >
+				<td th:utext="${user.id}" ></td>
 				<td th:utext="${user.nom}" ></td>
 				<td th:utext="${user.email}" ></td>
 				<td th:utext="${user.password}" ></td>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -85,13 +87,13 @@ public String userindex() {
 }
 
 @GetMapping("/add-product")
-public String addProduct(Model model ) {
-	ProductEntity p = new ProductEntity ();
-	model.addAttribute("product",p);
-	List<CategoryEntity> categories =  service.getAllCategories();
+public String addProduct(Model model) {
+	
+	List<CategoryEntity> categories = service.getAllCategories();
 	model.addAttribute("categories",categories);
 	CategoryEntity cat = new CategoryEntity ();
 	model.addAttribute("category",cat);
+	
 	return "forms/add-product";
 }
 
@@ -105,8 +107,8 @@ public String addReview(Model model ) {
 	return "Reviews/add-review";
 }
 @PostMapping("/add-product")
-public String registerSuccess(@ModelAttribute("product") ProductEntity product) {
-	service.createProduct(product);
+public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
+	service.createProduct(catname,nom,marque,description,file);
 	return "forms/productcreated";
 }
 @PostMapping("/add-categories")

@@ -1,6 +1,9 @@
 package projet.rest.data.services;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
@@ -25,7 +28,7 @@ public interface UserService {
     /**produit**/
     List<ProductEntity> getAllProduct() ; 
     ProductEntity getProductById( int id) ; 
-    ProductEntity createProduct ( ProductEntity productEntity) ; 
+    ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file )   ; 
     ProductEntity modifyProduct ( int id , ProductEntity newEntityProd);
     ProductEntity deleteProductEntity( int id ) ; 
     Float rate( int id);

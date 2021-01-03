@@ -2,7 +2,9 @@ package projet.rest.data.services;
 
  
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -11,8 +13,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
- 
+import org.springframework.web.multipart.MultipartFile;
 
 import projet.rest.data.models.AvisEntity;
 
@@ -213,8 +214,24 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
             throw new NoSuchElementException("User with id : "+id+" is not found"); 
     }
     @Override
-    public ProductEntity createProduct(ProductEntity productEntity) {
-        List<CategoryEntity> l = this.getAllCategories();
+public ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file ) {
+        
+    	ProductEntity productEntity = new ProductEntity ();
+    	productEntity.setCatname(cat);
+    	productEntity.setNom(nom);
+    	productEntity.setMarque(marque);
+    	productEntity.setDescription(description);
+    	String FileName = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+    	if(FileName.contains("..")) {
+    		System.out.println("not a proper file ");
+    	}
+    	try {
+			productEntity.setImg(Base64.getEncoder().encodeToString(file.getBytes()));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    	List<CategoryEntity> l = this.getAllCategories();
         for(CategoryEntity c : l)
         {
             if (productEntity.getCatname().equalsIgnoreCase(c.getTitle())) {
