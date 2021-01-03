@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>list user</title>
         <meta charset="utf-8">
@@ -20,8 +20,36 @@
 
         <link rel="stylesheet" href="../css/flaticon.css">
         <link rel="stylesheet" href="../css/style.css">
+        <style type="text/css">
+			span {
+			        display: inline-block;
+			        width: 200px;
+			        text-align: left;
+			    }
+		</style>
     </head>
     <body>
-    list user
+    <div align="center">
+		<h2> List Users :</h2>
+		<table border="1">
+			<tr>
+				<th>Name</th>
+				<th>E-mail</th>
+				<th>Password</th>
+				<th>Phone</th>
+				<th>Birth Date</th>
+				<th>Permission</th>
+			</tr>
+			<tr th:each ="user : ${users}" >
+				<td th:utext="${user.nom}" ></td>
+				<td th:utext="${user.email}" ></td>
+				<td th:utext="${user.password}" ></td>
+				<td th:utext="${user.phone}" ></td>
+				<td th:utext="${user.birthDate}" ></td>
+				<td th:utext="${user.Permission}" ></td>
+			</tr>
+		</table>
+		
+	</div>
     </body>
 </html>

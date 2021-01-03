@@ -34,7 +34,6 @@ public class UserEntity {
 private long id; //auto generé
 //@Column(name = "First Name",length = 50,nullable = false)
 private String nom;
-private String prenom;
 private String password; //prof qal mayet7atech el password fel table houni
 private LocalDate birthDate = LocalDate.now();
 public void setBirthDate(String date) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>add user</title>
+        <title>Admin - Add User</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
@@ -22,6 +22,53 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-    add user
+    <div class="contact-wrap w-100 p-md-5 p-4">
+                    <h3 class="mb-4">Add User</h3>
+
+                    <form method="POST" th:action="@{/adduser}" th:object="${user}" id="contactForm" class="contactForm" name="fsignup" onsubmit="return valider()">
+                      
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                        <input type="text" class="form-control" name="nom" id="nom" th:field="*{nom}" placeholder="Username">
+                          </div>
+                        </div>
+                         <div class="col-md-12"> 
+                          <div class="form-group">
+                            <input type="password" class="form-control" name="password" id="password" th:field="*{password}" placeholder="Password">
+                          </div>
+                        </div>
+                           <div class="col-md-12"> 
+                          <div class="form-group">
+                            <input type="password" class="form-control" name="confirm_password" id="confirm_password"  placeholder="confirm password" onkeyup="check_pass()"><br/>
+                            <span id="message"></span>
+                          </div>
+                        </div>
+                        <div class="col-md-12"> 
+                          <div class="form-group">
+                            <input type="email" class="form-control" name="email" id="email" th:field="*{email}" placeholder="Email">
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+
+                          <div class="form-group">
+                           <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}" placeholder="Phone">
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}" > 		
+                          </div>
+                         </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input type="submit" name="submit" id="submit" value="Sign up" class="btn btn-primary sign-up">
+                            <div class="submitting"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <script src="js/passwd.js"></script>
     </body>
 </html>

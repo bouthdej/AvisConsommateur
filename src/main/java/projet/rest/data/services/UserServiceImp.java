@@ -90,8 +90,6 @@ public class UserServiceImp implements UserService {
         UserEntity oldUser = this.getUserEntityById(id);
         if (newUser.getNom() != null)    
             oldUser.setNom(newUser.getNom());
-        if (newUser.getPrenom() != null)
-            oldUser.setPrenom(newUser.getPrenom());
         if (newUser.getBirthDate() != null)
             oldUser.setBirthDate(newUser.getBirthDate());
         if (newUser.getPermission() != null)

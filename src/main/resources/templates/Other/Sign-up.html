@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="scss/style.scss">
 
   </head>
   <body>
@@ -94,6 +95,7 @@
                     <h3 class="mb-4">Sign up</h3>
 
                     <form method="POST" th:action="@{/Sign-up}" th:object="${user}" id="contactForm" class="contactForm" name="fsignup" onsubmit="return valider()">
+                      
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
@@ -124,7 +126,7 @@
                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
-                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}" value="">
+                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}" > 		
                           </div>
                          </div>
                         <div class="col-md-12">

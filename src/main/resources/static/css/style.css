@@ -7,6 +7,10 @@
 
 
 /* Three column layout */
+input[type="date"], select, textarea{
+color:#000000;
+border-radius: 1px;
+}
 .result {
   float: left;
   padding-left:20px; 

@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
+import projet.rest.data.models.UserEntity;
 import projet.rest.data.services.UserService;
 
 @Controller
@@ -28,12 +29,25 @@ public class AdminControler {
 	
 	/*Users*/
 	@GetMapping("/userlist")
-	public String AllUsers() {
+	public String AllUsers(Model model) {
+		List<UserEntity> users =  service.getAllUserEntity();
+		model.addAttribute("users",users);
+		UserEntity user = new UserEntity();
+		model.addAttribute("user",user);
+		
 	    return "admin/userlistadmin";
 	}
 	@GetMapping("/adduser")
-	public String AddUsers() {
+	public String AddUsers(Model model) {
+		UserEntity user = new UserEntity();
+		model.addAttribute("user",user);
 	    return "admin/adduseradmin";
+	}
+	@PostMapping("/adduser")
+	public String UserregisterSuccess(@ModelAttribute("user") UserEntity user, Model model) {
+		service.createUserEntity(user);
+		
+		return this.AllUsers(model);
 	}
 	@GetMapping("/deluser")
 	public String DelUsers() {
