@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Products list </title>
+<head>
+        <title>add category</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
@@ -20,46 +20,24 @@
 
         <link rel="stylesheet" href="../css/flaticon.css">
         <link rel="stylesheet" href="../css/style.css">
-        <style type="text/css">
-			span {
-			        display: inline-block;
-			        width: 200px;
-			        text-align: left;
-			    }
-		</style>
     </head>
-    <body>
-    <div align="center">
-		<h2 class="mb-4"> Product List </h2>
-		<table border="1">
-			<tr>
-			
-				<th>ID</th>
-				<th>Image</th>
-				<th>Name</th>
-				<th>Brand</th>
-				<th>Category</th>
-				<th>Date Of creation</th>
-				<th>Description</th>
-				<th>Rate</th>
-				
-				
-			</tr>
-			<tr th:each ="product : ${products}" >
-			
-			 
-		
-				<td th:utext="${product.idp}" ></td>
-				 <td><img alt="" th:src="*{'data:img/png;base64,'+{product.img}}" style="width: 100px;height: 100px;"></td>
-				<td th:utext="${product.nom}" ></td>
-				<td th:utext="${product.marque}" ></td>
-				<td th:utext="${product.catname}" ></td>
-				<td th:utext="${product.dateofcreation}" ></td>
-				<td th:utext="${product.description}" ></td>
-				<td th:utext="${product.rate}" ></td>
-			</tr>
-		</table>
-		
+<body>
+	<div class="contact-wrap w-100 p-md-5 p-4">
+        <h3 class="mb-4">Add Category</h3>
+		<form action="#" th:action="@{/addcategorie}" method="post" th:object="${Category}" id="contactForm" class="contactForm">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                        	<input type="text" class="form-control" th:field="*{Title}" name="Title" id="Title" placeholder="Title of Categorie">
+                          </div>
+                        </div>        
+   
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input type="submit" value="Add category" class="btn btn-primary sign-up">
+                            <div class="submitting"></div>
+                          </div>
+                        </div>
+       </form>
 	</div>
-    </body>
+</body>
 </html>

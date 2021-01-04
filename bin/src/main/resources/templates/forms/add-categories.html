@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Sign-Up</title>
+    <title>Your advancer - Add Product</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -20,15 +20,14 @@
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="scss/style.scss">
-
+	
   </head>
-  <body>
-    <div class="wrap">
+<body>
+<div class="wrap">
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-3 d-flex align-items-center">
-            <a class="navbar-brand d-flex" href="/"><div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
+            <a class="navbar-brand d-flex" href="/user"><div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
           </div>
           <div class="col-3 d-flex justify-content-end align-items-center">
             <div class="social-media">
@@ -51,15 +50,19 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fa fa-bars"></span> Menu
           </button>
-           <div class="req-button order-lg-last">
-            <a href="/add-product"><span class="fa fa-upload" aria-hidden="true"></span> Add product</a>
-          </div>
+          	<div class="req-button order-lg-last">
+            <a href=""><span class="fa fa-upload" aria-hidden="true"></span> Add Categories</a>
+          	</div>
+            <div class="req-button order-lg-last">
+            <a href=""><span class="fa fa-upload" aria-hidden="true"></span> Add product</a>
+          	</div>
             <div class="req-button order-lg-last">
             <a href="/Login"><span class="fa fa-user" aria-hidden="false"></span> Login</a>
-          </div>
+          	</div>
             <div class="req-button order-lg-last">
             <a href="/Sign-up"><span class="fa fa-user" aria-hidden="true"></span> Sign up</a>
-          </div>
+          	</div>
+       
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
@@ -71,13 +74,13 @@
         </div>
       </nav>
       <!-- END nav -->
-      <div class="hero-wrap hero-wrap-2" style="background-image: url('static/images/10.png');" data-stellar-background-ratio="0.5">
+      <div class="hero-wrap hero-wrap-2" style="background-image: url('static/images/800.jpeg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
-              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span>Sign-Up <i class="fa fa-chevron-right"></i></span></p>
-              <h1 class="mb-0 bread">Sign-Up</h1>
+              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span>Add Product <i class="fa fa-chevron-right"></i></span></p>
+              <h1 class="mb-0 bread">Add Product</h1>
             </div>
           </div>
         </div>
@@ -87,83 +90,36 @@
     <section class="ftco-section bg-light" >
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-9">
+          <div class="col-md-5">
             <div class="wrapper">
               <div class="row no-gutters">
-                <div class="col-md-6  d-flex">
                   <div class="contact-wrap w-100 p-md-5 p-4">
-                    <h3 class="mb-4">Sign up</h3>
+                    <h3 class="mb-4">Add New category</h3>
 
-                    <form method="POST" th:action="@{/Sign-up}" th:object="${user}" id="contactForm" class="contactForm" name="fsignup" onsubmit="return valider()">
-                      
-                      <div class="row">
+                    <form action="#" th:action="@{/add-categories}" method="post" th:object="${Category}" id="contactForm" class="contactForm">
+                  
+                      	
                         <div class="col-md-12">
                           <div class="form-group">
-                        <input type="text" class="form-control" name="nom" id="nom" th:field="*{nom}" placeholder="Username">
+                        	<input type="text" class="form-control" th:field="*{Title}" name="Title" id="Title" placeholder="Title of Categorie">
                           </div>
-                        </div>
-                         <div class="col-md-12"> 
-                          <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="password" th:field="*{password}" placeholder="Password">
-                          </div>
-                        </div>
-                           <div class="col-md-12"> 
-                          <div class="form-group">
-                            <input type="password" class="form-control" name="confirm_password" id="confirm_password"  placeholder="confirm password" onkeyup="check_pass()"><br/>
-                            <span id="message"></span>
-                          </div>
-                        </div>
-                        <div class="col-md-12"> 
-                          <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="email" th:field="*{email}" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-
-                          <div class="form-group">
-                           <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}" placeholder="Phone">
-                          </div>
-                        </div>
+                        </div>        
+   
                         <div class="col-md-12">
                           <div class="form-group">
-                        		<input type="date" name="birthDate" id="birthDate"  th:field="*{birthDate}" > 		
-                          </div>
-                         </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <input type="submit" name="submit" id="submit" value="Sign up" class="btn btn-primary sign-up">
+                            <input type="submit" value="Add product" class="btn btn-primary sign-up">
                             <div class="submitting"></div>
                           </div>
                         </div>
-                      </div>
                     </form>
                   </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-stretch">
-                    <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
-                           <br> 
-                           <br>
-                           <br>
-                        <div class="sign-up">
-                            <a class="btn btn-primary mt-5 " style=" background-color: #3B5998;  color: white;"><span class="fa fa-facebook"> </span>  Login with Facebook </a>
-                            <a class="btn btn-primary mt-4" style="    background-color: #55ACEE;  color: white;"><span class="fa fa-twitter"></span> login with Twitter</a>
-                			<a class="btn btn-primary mt-4" style="  background-color: #dd4b39; color: white;"><span class="fa fa-google"></span> login with Google +</a>
-                     	</div>
-  
-                         
-                    </div>
-                  
-                    </div>
-                   
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
-          </div>
-
+         
     </section>
-
-  
 
 
     <footer class="footer ftco-section">
@@ -227,17 +183,12 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Your Advancer</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
       </div>
     </footer>
-    
-  
-
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
   <script src="js/jquery.min.js"></script>
@@ -256,6 +207,5 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/passwd.js"></script>
-  </body>
+</body>
 </html>

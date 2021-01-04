@@ -158,8 +158,8 @@ public class UserServiceImp implements UserService {
     @Override
     public List<ProductEntity> getAllProduct() {
         // TODO Auto-generated method stub
-        return null;
-    }
+        return reposProduct.findAll(); 
+        }
 
  
 

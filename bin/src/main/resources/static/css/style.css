@@ -5,8 +5,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
- 
+
 /* Three column layout */
+input[type="date"], select, textarea{
+color:#000000;
+border-radius: 1px;
+}
 .result {
   float: left;
   padding-left:20px; 
@@ -8942,7 +8946,7 @@ h1, h2, h3, h4, h5,
      display: block !important; }
  .appointment .form-control {
    border: 1px solid rgba(0, 0, 0, 0.1);
-   background: white !important;
+   background: rgb(192, 192, 192) !important;
    color: rgba(0, 0, 0, 0.8) !important;
    font-size: 14px;
    font-weight: 500;
@@ -9674,7 +9678,7 @@ textarea.form-control {
        font-weight: 400;
        border-radius: 4px; }
        .comment-list li .comment-body .reply:hover {
-         color: #fff;
+         color: #c0c0c0;
          background: black; }
 
 .search-form .form-group {

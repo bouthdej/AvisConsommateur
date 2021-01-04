@@ -87,23 +87,29 @@ public class AdminControler {
 	
 	/*Products*/
 	@GetMapping("/productlist")
-	public String AllProducts() {
+	public String AllProducts(Model model) {
+		
+			List<ProductEntity> products =  service.getAllProduct();
+			model.addAttribute("products",products);
+			ProductEntity product = new ProductEntity();
+			model.addAttribute("product",product);
+			
 	    return "admin/productlistadmin";
 	}
+	
 	@GetMapping("/addproductadmin")
 	public String AddProducts(Model model) {
-		ProductEntity p = new ProductEntity ();
-		model.addAttribute("product",p);
-		List<CategoryEntity> categories =  service.getAllCategories();
+		List<CategoryEntity> categories = service.getAllCategories();
 		model.addAttribute("categories",categories);
 		CategoryEntity cat = new CategoryEntity ();
 		model.addAttribute("category",cat);
 	    return "admin/addproductadmin";
 	}
 	@PostMapping("/addproductadmin")
-	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
+	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file , Model model ) {
 		service.createProduct(catname,nom,marque,description,file);
-		return "forms/productcreated";
+		 return this.AllProducts(model);
+		
 	}
 	@GetMapping("/delproduct")
 	public String DelProducts() {
