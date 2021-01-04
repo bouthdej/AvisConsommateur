@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Roofing - Free Bootstrap 4 Template by Colorlib</title>
+  
+    <title>Your Advancer- Products </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -26,7 +27,7 @@
 	    <div class="container">
 				<div class="row justify-content-between">
 					<div class="col-3 d-flex align-items-center">
-						<a class="navbar-brand d-flex" href=""><div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
+						<a class="navbar-brand d-flex" href=""> <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
 					</div>
 					<div class="col-3 d-flex justify-content-end align-items-center">
 						<div class="social-media">
@@ -100,22 +101,8 @@
                     <a class="nav-link py-4"><strong> <i class="fa fa-align-justify mr-3" aria-hidden="true"></i>Categories</strong></a>
                   </li>
                   <li class="nav-item text-left">
-                    <a class="nav-link active py-4" data-toggle="tab" href="#services-1"><span class="fa fa-mobile mr-3" aria-hidden="true"></span> Smartphones</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link py-4" data-toggle="tab" href="#services-2"><span class="fa fa-eercast mr-3   " aria-hidden="true"></span> Washer</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link py-4" data-toggle="tab" href="#services-3"><span class="flaticon-roof-5 mr-2"></span> Industrial Roofing</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link py-4" data-toggle="tab" href="#services-4"><span class="flaticon-roof-2 mr-2"></span> Residential Roofing</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link py-4" data-toggle="tab" href="#services-5"><span class="flaticon-roof-3 mr-2"></span> Gutter Cleaning</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link border-bottom py-4" data-toggle="tab" href="#services-6"><span class="flaticon-roof-4 mr-2"></span> Commercial Roofing</a>
+
+                <a class="nav-link active py-4" href="/products/${category.Title}" th:each="category : ${categories}" th:value="${category.Title}"  th:text="${category.Title}"><span class="fa fa-mobile mr-3" aria-hidden="true"></span> </a>
                   </li>
                 </ul>
               </div>
@@ -127,16 +114,16 @@
                 <div class="tab-content">
                   <div class="tab-pane container p-0 active" id="services-1">
                     <!--///////////////////////////////////////////////////////////////-->
-                      <div class="row">
-          <div class="col-md-4 d-flex ftco-animate">
+                      <div class="row" >
+          <div class="col-md-4 d-flex ftco-animate" th:each="product : ${products}">
             <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
+              <a href="/add-review" class="block-20" ><center> <img alt="" th:src="*{'data:img/png;base64,'+{product.img}}" style="width: 150px; height: 180px; "></center>
               </a>
               <div class="text p-3">
                 <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url(static/images/1.jpg);"></div>
+                  <div class="img author" style="background-image: url(static/images//CustomerReview/src/main/resources/static/images/no-image.jpg);" ></div>
                   <div class="desc pl-3">
-                    <span>Mate 10 Lite</span>
+                    <span th:value=" ${product.nom}" th:text="${product.nom}"></span>
                     <span><i class="fa fa-star checked"></i>
                       <i class="fa fa-star checked"></i>
                       <i class="fa fa-star-half-o checked"></i>
@@ -147,94 +134,14 @@
                   </div>
                 </div>
                 <div class="desc ">
-                  <span>Posted by John doe</span>
+                  <span th:value="${product.rate}" th:text="${product.rate}"></span>
                  
                 </div>
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
+                <h3 class="heading" th:value="${product.nom}" th:text="${product.nom}"><a href="#"></a></h3>
                 <div>24 March 2020</div>
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
-              </a>
-              <div class="text p-3">
-                <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url(static/images/1.jpg);"></div>
-                  <div class="desc pl-3">
-                    <span>Posted by John doe</span>
-                    <span>24 March 2020</span>
-                  </div>
-                </div>
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
-              </a>
-              <div class="text p-3">
-                <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url(static/images/1.jpg);"></div>
-                  <div class="desc pl-3">
-                    <span>Posted by John doe</span>
-                    <span>24 March 2020</span>
-                  </div>
-                </div>
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
-              </a>
-              <div class="text p-3">
-                <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url('static/images/1.jpg');"></div>
-                  <div class="desc pl-3">
-                    <span>Posted by John doe</span>
-                    <span>24 March 2020</span>
-                  </div>
-                </div>
-             
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
-               
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
-              </a>
-              <div class="text p-3">
-                <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url(static/images/1.jpg);"></div>
-                  <div class="desc pl-3">
-                    <span>Posted by John doe</span>
-                    <span>24 March 2020</span>
-                  </div>
-                </div>
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="/add-review" class="block-20" style="background-image: url('static/images/1.jpg');">
-              </a>
-              <div class="text p-3">
-                <div class="posted mb-3 d-flex">
-                  <div class="img author" style="background-image: url(static/images/1.jpg);"></div>
-                  <div class="desc pl-3">
-                    <span>Posted by John doe</span>
-                    <span>24 March 2020</span>
-                  </div>
-                </div>
-                <h3 class="heading"><a href="#">How Roofing Charge for Their Services</a></h3>
-              </div>
             </div>
           </div>
         </div>

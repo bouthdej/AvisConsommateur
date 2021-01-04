@@ -41,9 +41,23 @@ public String Washingmaching() {
     return "categorie/washmachine/washingmachine";
 }*/
 @GetMapping("/Products")
-	public String AllProducts() {
+	public String AllProducts(Model model ) { 
+	List <ProductEntity> products = service.getAllProduct();
+	ProductEntity product = new ProductEntity();
+	model.addAttribute("product", product);
+	model.addAttribute("products", products);
+	List <CategoryEntity> categories = service.getAllCategories() ;
+		CategoryEntity category = new CategoryEntity();
+		model.addAttribute("category", category);
+		if(categories.isEmpty()==false)
+		{
+		model.addAttribute("categories",categories);
 	    return "Other/products";
 	}
+		else {
+			
+		return "Other/productsnotfounds";}
+		}
 
 
 @GetMapping("/Contact")

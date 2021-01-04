@@ -75,6 +75,7 @@ public class AdminControler {
 		model.addAttribute("Category",c);
 	    return "admin/addcategorieadmin";
 	}
+
 	@PostMapping("/addcategorie")
 	public String registerSuccess(@ModelAttribute("Category") CategoryEntity Category, Model model) {
 		service.createCategory(Category);
@@ -96,6 +97,7 @@ public class AdminControler {
 			
 	    return "admin/productlistadmin";
 	}
+	
 	
 	@GetMapping("/addproductadmin")
 	public String AddProducts(Model model) {
