@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import projet.rest.data.services.SendEmailService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import projet.rest.data.models.AvisEntity;
@@ -28,6 +28,8 @@ import projet.rest.data.services.UserService;
 public class Controlerr {
 	@Autowired
 UserService service ;
+	@Autowired
+SendEmailService SendEmailService;
 	@GetMapping("/")
 	public String returnindex() {
 	    return "/index";
@@ -61,7 +63,15 @@ public String Washingmaching() {
 
 
 @GetMapping("/Contact")
-public String Contact() {
+public String Contact(Model model) {
+	
+    return "Other/contact";
+}
+@PostMapping("/Contact")
+public String ContactMail(@RequestParam("email") String to,@RequestParam("message") String body, @RequestParam("subject") String topic,@RequestParam("name") String name) {
+	System.out.println("Sending : "+to+" "+body+" "+topic);
+	SendEmailService.sendEmail(to,body,"By "+name+": "+topic);
+	System.out.println("Success : "+to+" "+body+" "+topic);
     return "Other/contact";
 }
 
