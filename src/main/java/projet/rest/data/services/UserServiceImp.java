@@ -191,8 +191,9 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
 
     @Override
     public ProductEntity deleteProductEntity(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        ProductEntity p = this.getProductById(id);
+        reposProduct.deleteById(id);
+    	return p;
     }
     
     

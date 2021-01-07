@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,9 +52,10 @@ public class AdminControler {
 		
 		return this.AllUsers(model);
 	}
-	@GetMapping("/deluser")
-	public String DelUsers() {
-	    return "admin/deluseradmin";
+	@GetMapping("/deluser/{id}")
+	public String DelUsers(@PathVariable("id") Long id, Model model) {
+	    service.deleteUserEntity(id);
+		return this.AllUsers(model);
 	}
 	@GetMapping("/upduser")
 	public String UpdUsers() {
@@ -81,9 +83,10 @@ public class AdminControler {
 		service.createCategory(Category);
 		return this.AllCategoris(model);
 	}
-	@GetMapping("/delcategorie")
-	public String DelCategories() {
-	    return "admin/delcategorieadmin";
+	@GetMapping("/delcategorie/{id}")
+	public String DelCategories(@PathVariable("id") int id, Model model) {
+		service.deleteCategoryEntity(id);
+		return this.AllCategoris(model);
 	}
 	
 	/*Products*/
@@ -113,9 +116,10 @@ public class AdminControler {
 		 return this.AllProducts(model);
 		
 	}
-	@GetMapping("/delproduct")
-	public String DelProducts() {
-	    return "admin/delproductadmin";
+	@GetMapping("/delproduct/{id}")
+	public String DelProducts(@PathVariable("id") int id, Model model) {
+		service.deleteProductEntity(id);
+		return this.AllProducts(model);
 	}
 	@GetMapping("/updproduct")
 	public String UpdProducts() {
