@@ -89,8 +89,8 @@ public class UserServiceImp implements UserService {
     @Override
     public UserEntity modifyUserEntity(long id, UserEntity newUser) {
         UserEntity oldUser = this.getUserEntityById(id);
-        if (newUser.getNom() != null)    
-            oldUser.setNom(newUser.getNom());
+        if (newUser.getUsername() != null)    
+            oldUser.setUsername(newUser.getUsername());
         if (newUser.getBirthDate() != null)
             oldUser.setBirthDate(newUser.getBirthDate());
         if (newUser.getPermission() != null)
