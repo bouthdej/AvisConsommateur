@@ -45,12 +45,7 @@ public  class AvisEntity {
     @ManyToMany
     @JoinTable(name = "DislikedBy")
     @JsonIgnore
-
- 
-
     private List<UserEntity> dislikedBy;
-
- 
 
     @JsonIgnore
     @ManyToOne

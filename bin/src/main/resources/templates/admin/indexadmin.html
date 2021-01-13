@@ -22,7 +22,7 @@
   </head>
   <body>
 		
-		<section>
+		<section >
 			<nav class="navbar navbar-expand-lg   bg-dark ftco-navbar-light fixed-top" >
 		    <div class="container-fluid" >
 		    
@@ -53,8 +53,8 @@
 	    <!-- END nav -->
 		</section>
 
-    <section class="ftco-section ">
-      <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:170px;">
+    <section class="ftco-section  " >
+      <div class="w3-sidebar w3-bar-block w3-light-grey w3-card col-3 col-s-3 menu" style="width:170px;">
         
         <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAccU')">
           Users <i class="fa fa-caret-down"></i>
@@ -62,7 +62,6 @@
         <div id="demoAccU" class="w3-hide w3-white w3-card">
           <a href="/userlist" onclick="openlink(event, 'iframe_userlist')" target="iframe_userlist" class="w3-bar-item w3-button active">User List</a>
           <a href="/adduser" onclick="openlink(event, 'iframe_adduser')" target="iframe_adduser" class="w3-bar-item w3-button ">Add User</a>
-          <a href="/deluser" onclick="openlink(event, 'iframe_deluser')" target="iframe_deluser" class="w3-bar-item w3-button">Delete User</a>
           <a href="/upduser" onclick="openlink(event, 'iframe_upduser')" target="iframe_upduser" class="w3-bar-item w3-button">update User</a>
         </div>
       
@@ -72,7 +71,6 @@
         <div id="demoAccC" class="w3-hide w3-white w3-card">
             <a href="/categorielist" onclick="openlink(event, 'iframe_catlist')" target="iframe_catlist" class="w3-bar-item w3-button">Categories List</a>
             <a href="/addcategorie" onclick="openlink(event, 'iframe_addcat')" target="iframe_addcat" class="w3-bar-item w3-button tablinks">Add Categorie</a>
-            <a href="/delcategorie" onclick="openlink(event, 'iframe_delcat')" target="iframe_delcat" class="w3-bar-item w3-button tablinks">Delete Categorie</a>
         </div>
         <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAccP')">
             Products <i class="fa fa-caret-down"></i>
@@ -80,7 +78,6 @@
         <div id="demoAccP" class="w3-hide w3-white w3-card">
             <a href="/productlist" onclick="openlink(event, 'iframe_prodlist')" target="iframe_prodlist" class="w3-bar-item w3-button">Product List</a>
             <a href="/addproductadmin" onclick="openlink(event, 'iframe_addprod')" target="iframe_addprod" class="w3-bar-item w3-button tablinks">Add Product</a>
-            <a href="/delproduct" onclick="openlink(event, 'iframe_delprod')" target="iframe_delprod" class="w3-bar-item w3-button tablinks">Delete Product</a>
             <a href="/updproduct" onclick="openlink(event, 'iframe_updprod')" target="iframe_updprod" class="w3-bar-item w3-button tablinks">update Product</a>
         </div>
         
@@ -90,20 +87,17 @@
         <div id="demoAccR" class="w3-hide w3-white w3-card">
           <a href="/reviewlist" onclick="openlink(event, 'iframe_revlist')" target="iframe_revlist" class="w3-bar-item w3-button">Reviews List</a>
           <a href="/addreview" onclick="openlink(event, 'iframe_addrev')" target="iframe_addrev" class="w3-bar-item w3-button">Add Reviews</a>
-          <a href="/delreview" onclick="openlink(event, 'iframe_delrev')" target="iframe_delrev" class="w3-bar-item w3-button">Delete Reviews</a>
           <a href="/updreview" onclick="openlink(event, 'iframe_updrev')" target="iframe_updrev" class="w3-bar-item w3-button">update Reviews</a>
           <a href="/reportreview" onclick="openlink(event, 'iframe_reportrev')" target="iframe_reportrev" class="w3-bar-item w3-button">Reported Reviews</a>
         </div>
 
       </div>
-      <div class="tab-pane container p-0 ">
+      <div class="col-lg-12 col-xs-12 ">
+      <div class="tab-pane container p-0  ">
         <iframe  id="iframe_userlist" class="tabcontent" name="iframe_userlist" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 ">
         <iframe  id="iframe_adduser" class="tabcontent" name="iframe_adduser" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
-      </div>
-      <div class="tab-pane container p-0 ">
-        <iframe  id="iframe_deluser" class="tabcontent" name="iframe_deluser" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 ">
         <iframe  id="iframe_upduser" class="tabcontent" name="iframe_upduser" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
@@ -115,16 +109,10 @@
         <iframe  id="iframe_addcat" class="tabcontent" name="iframe_addcat" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 ">
-        <iframe  id="iframe_delcat" class="tabcontent" name="iframe_delcat" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
-      </div>
-      <div class="tab-pane container p-0 ">
         <iframe  id="iframe_prodlist" class="tabcontent" name="iframe_prodlist" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 " >
         <iframe id="iframe_addprod" class="tabcontent" name="iframe_addprod" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
-      </div>
-      <div class="tab-pane container p-0 " >
-        <iframe id="iframe_delprod" class="tabcontent" name="iframe_delprod" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 ">
         <iframe  id="iframe_updprod" class="tabcontent" name="iframe_updprod" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
@@ -135,14 +123,12 @@
       <div class="tab-pane container p-0 " >
         <iframe id="iframe_addrev" class="tabcontent" name="iframe_addrev" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
-      <div class="tab-pane container p-0 " >
-        <iframe id="iframe_delrev" class="tabcontent" name="iframe_delrev" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
-      </div>
       <div class="tab-pane container p-0 ">
         <iframe  id="iframe_updrev" class="tabcontent" name="iframe_updrev" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
       </div>
       <div class="tab-pane container p-0 ">
         <iframe  id="iframe_reportrev" class="tabcontent" name="iframe_reportrev" height="630px" width="1300px" style="border:none;" title="Iframe Example"></iframe>
+      </div>
       </div>
       <script>
       function openlink(evt, cityName) {

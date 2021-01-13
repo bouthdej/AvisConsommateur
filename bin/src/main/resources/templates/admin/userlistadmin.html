@@ -29,17 +29,20 @@
 		</style>
     </head>
     <body>
-    <div align="center">
+    <div align="center" class="container-fluid table-responsive ">
+		<hr>
 		<h2 class="mb-4"> List Users </h2>
-		<table border="1">
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>E-mail</th>
-				<th>Password</th>
-				<th>Phone</th>
-				<th>Birth Date</th>
+		<hr>
+		<table border="1" class="table">
+			<tr  class="thead-light">
+				<th >ID</th>
+				<th >Name</th>
+				<th >E-mail</th>
+				<th >Password</th>
+				<th >Phone</th>
+				<th >Birth Date</th>
 				<th>Permission</th>
+				<th >Delete</th>
 			</tr>
 			<tr th:each ="user : ${users}" >
 				<td th:utext="${user.id}" ></td>
@@ -49,9 +52,14 @@
 				<td th:utext="${user.phone}" ></td>
 				<td th:utext="${user.birthDate}" ></td>
 				<td th:utext="${user.Permission}" ></td>
+				<td>
+					<a th:href="@{/deluser/{id}(id=${user.id})}" class="btn btn-danger mt-4">Delete</a>
+				</td>
 			</tr>
 		</table>
 		
 	</div>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
     </body>
 </html>
