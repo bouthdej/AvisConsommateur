@@ -12,6 +12,7 @@ import java.util.Optional;
  
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,7 +37,8 @@ import projet.rest.data.repositories.UserRepository;
 public class UserServiceImp implements UserService {
 
  
-
+	 @Autowired
+	   	private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserRepository reposUser;
     private CategoryRepository reposCat ; 
     private ProductRepository reposProduct ; 
@@ -76,13 +78,16 @@ public class UserServiceImp implements UserService {
 
  
 
-    @Override
-    public UserEntity createUserEntity(UserEntity entity) {
-        
-                UserEntity user = reposUser.save(entity);
-                                
-                return user;
-    }
+   
+       @Override
+       public UserEntity createUserEntity(UserEntity entity) {
+       	String password = bCryptPasswordEncoder.encode(entity.getPassword());
+       	entity.setPassword(password);
+       	entity.setRole("USER");
+                   UserEntity user = reposUser.save(entity);
+                                   
+                   return user;
+       }
 
  
 
@@ -93,8 +98,8 @@ public class UserServiceImp implements UserService {
             oldUser.setUsername(newUser.getUsername());
         if (newUser.getBirthDate() != null)
             oldUser.setBirthDate(newUser.getBirthDate());
-        if (newUser.getPermission() != null)
-            oldUser.setPermission(newUser.getPermission());
+        if (newUser.getRole() != null)
+            oldUser.setRole(newUser.getRole());
         
         return reposUser.save(oldUser); // 
     }
@@ -173,7 +178,7 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
         else
             throw new NoSuchElementException("Product with this id is not found with this id is not found");
         return productentity; 
-    }
+    } 
     @Override
     public ProductEntity modifyProduct(int id, ProductEntity newEntityProd) {
           ProductEntity oldproduct = this.getProductById(id);
@@ -183,6 +188,15 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
         
           if (newEntityProd.getNom()!= null )
             oldproduct.setNom(newEntityProd.getNom());
+          if (newEntityProd.getDescription()!= null )
+              oldproduct.setDescription(newEntityProd.getDescription());
+          if (newEntityProd.getImg()!= null )
+              oldproduct.setImg(newEntityProd.getImg());
+          
+             
+          
+          
+          
            return reposProduct.save(oldproduct);
         
     }
@@ -251,6 +265,7 @@ public ProductEntity createProduct(String cat ,String nom, String marque , Strin
     public ProductEntity createAvis(int id, AvisEntity a ) {
         ProductEntity productEntity = getProductById(id);
         float note;
+     
         note=(a.getCameraquality()+a.getQalityPrice()+a.getDesign())/3;
         a.setNote(note);
         a.setProduct(productEntity);

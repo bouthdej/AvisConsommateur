@@ -45,4 +45,5 @@ public class ProductEntity {
 	private String img; 
 
 	private String description ;
+
 }

@@ -45,22 +45,27 @@
 				<th>Description</th>
 				<th>Rate</th>
 				<th >Delete</th>
+				<th >Edit</th>
+				
 	
 			</tr>
 			<tr th:each ="product : ${products}" >
 
-				<td th:utext="${product.idp}" ></td>
+				<td th:utext="${product.idp}"  ></td>
 				<td>
 					<img alt="" th:src="*{'data:img/png;base64,'+{product.img}}" style="width: 100px;height: 100px;">
 				</td>
-				<td th:utext="${product.nom}" ></td>
+				<td th:utext="${product.nom}"  ></td>
 				<td th:utext="${product.marque}" ></td>
 				<td th:utext="${product.catname}" ></td>
 				<td th:utext="${product.dateofcreation}" ></td>
 				<td th:utext="${product.description}" ></td>
 				<td th:utext="${product.rate}" ></td>
 				<td>
-					<a th:href="@{/delproduct/{id}(id=${product.idp})}" class="btn btn-danger mt-4">Delete</a>
+					<a th:href="@{/delproduct/{id}(id=${product.idp})}" aria-hidden="true" class="btn btn-danger mt">Delete</a>
+				
+				</td>
+				<td> 				<a th:href="@{/updproduct/{id}(id=${product.idp})}"   aria-hidden="true" class="btn btn-info mt">edit</a>
 				</td>
 			</tr>
 		</table>

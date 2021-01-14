@@ -41,17 +41,17 @@
 				<th >Password</th>
 				<th >Phone</th>
 				<th >Birth Date</th>
-				<th>Permission</th>
+				<th>Role</th>
 				<th >Delete</th>
 			</tr>
 			<tr th:each ="user : ${users}" >
 				<td th:utext="${user.id}" ></td>
-				<td th:utext="${user.nom}" ></td>
+				<td th:utext="${user.username}" ></td>
 				<td th:utext="${user.email}" ></td>
 				<td th:utext="${user.password}" ></td>
 				<td th:utext="${user.phone}" ></td>
 				<td th:utext="${user.birthDate}" ></td>
-				<td th:utext="${user.Permission}" ></td>
+				<td th:utext="${user.Role}" ></td>
 				<td>
 					<a th:href="@{/deluser/{id}(id=${user.id})}" class="btn btn-danger mt-4">Delete</a>
 				</td>

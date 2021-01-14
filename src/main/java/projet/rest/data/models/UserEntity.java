@@ -46,7 +46,7 @@ public String getBirthDate() {
 }
 private String email;
 private String phone;
-private String Permission;
+private String Role;
 @ManyToMany(mappedBy = "LikedBy", cascade = CascadeType.REMOVE)
 private List<AvisEntity> Likedavis;
 @ManyToMany(mappedBy = "dislikedBy", cascade = CascadeType.REMOVE)
