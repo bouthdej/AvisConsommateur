@@ -35,10 +35,10 @@ public interface UserService {
     
     /**avis**/
     public ProductEntity createAvis(int id, AvisEntity a ) ;
-    ProductEntity deleteAvisEntity( int id ) ; 
+    AvisEntity deleteAvisEntity( int id ) ; 
     List<AvisEntity> getAllAvisEntity(int id);
     AvisEntity getAvisById( int id) ; 
-    AvisEntity modifyAvis ( int id , AvisEntity newEntityAvis);
+    AvisEntity modifyAvis( int id , AvisEntity newEntityAvis);
     public AvisEntity addLike(int id , long userid);
     //public AvisEntity addDisLike(int id , int userid);
 }

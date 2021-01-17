@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Your Advancer</title>
+    <title>Your Advancer - Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- 
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-	
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+ 
+    <link rel="stylesheet" th:href="@{../css/animate.css}">
+    
+    <link rel="stylesheet" th:href="@{../css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{../css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{../css/magnific-popup.css}">
+
+    <link rel="stylesheet" th:href="@{../css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{../css/jquery.timepicker.css}">
+
+    <link rel="stylesheet" th:href="@{../css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
   </head>
   <body>
 		<div class="wrap">
 	    <div class="container">
 				<div class="row justify-content-between">
 					<div class="col-3 d-flex align-items-center">
-						<a class="navbar-brand d-flex" href="index.html"><div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
+						<a class="navbar-brand d-flex" href=""><div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-star-half"></span></div>Your Advancer</a>
 					</div>
 					<div class="col-3 d-flex justify-content-end align-items-center">
 						<div class="social-media">
@@ -50,24 +51,32 @@
 		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="fa fa-bars"></span> Menu
 		      </button>
-		         <div class="req-button order-lg-last">
-		      	<a href="add-product.html"><span class="fa fa-upload" aria-hidden="true"></span> Add product</a>
-	        </div>
-	          <div class="req-button order-lg-last">
-		      	<a href="login.html"><span class="fa fa-user" aria-hidden="false"></span> Login</a>
-	        </div>
+		     
 		        <div class="req-button order-lg-last">
-		      	<a href="Sign-up.html"><span class="fa fa-user" aria-hidden="true"></span> Sign up</a>
+		      	<a href="/add-product"><span class="fa fa-upload" aria-hidden="true"></span> Add product</a>
 	        </div>
-	       
+	        <!-- statiqueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee  -->
+		        <div class="dropdown order-lg-last ml-4 dark-text">
+        <a  id="dropdownMenuButton" data-toggle="dropdown" class= " dark-text" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user-circle-o"  style="font-size: 20px;" aria-hidden="true"></i>   welcome , nour  <i class="fa fa-chevron-down" aria-hidden="true"></i>   </a>
+            
+          
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+           <a class="dropdown-item" href="/logout"> <i class="fa fa-sign-out" ></i> Logout </a>
+           <a class="dropdown-item" href="/update_user">  <i class="fa fa-refresh"></i> Update account</a>
+           </div>
+         </div>
+        
+		
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav mr-auto">
-		        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-		        	<li class="nav-item"><a href="index.html#concept" class="nav-link">About</a></li>
-		        	<li class="nav-item"><a href="products.html" class="nav-link">Our products</a></li>
-		        	<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
+		        	<li class="nav-item active"><a href="" class="nav-link">Home</a></li>
+		        	<li class="nav-item"><a href="/#about" class="nav-link">About</a></li>
+		        	<li class="nav-item"><a href="/Products" class="nav-link">Our products</a></li>
+		        	<li class="nav-item"><a href="/Contact" class="nav-link">Contact</a></li>
+		        	
 		        
-		         
+		   
 		        </ul>
 		      </div>
 		    </div>
@@ -83,7 +92,7 @@
 			          	<div class="text w-100">
 			          		<h2>Research & Read Business Reviews Before Buying</h2>
 				            <h1 class="mb-4">Behind every review is an experience that matters</h1>
-				            <p><a href="products.html" class="btn btn-primary">Start the experience</a></p>
+				            <p><a href="/Products" class="btn btn-primary">Start the experience</a></p>
 			            </div>
 			          </div>
 			        </div>
@@ -98,7 +107,7 @@
 			          		<h2>Research & Read Business Reviews Before Buying</h2>
 				            <h1 class="mb-4">
                            We analyze millions of reviews to find the best products for you</h1>
-				            <p><a href="products.html"class="btn btn-primary">Start the experience</a></p>
+				            <p><a href="/Products"class="btn btn-primary">Start the experience</a></p>
 			            </div>
 			          </div>
 			        </div>
@@ -114,7 +123,7 @@
 			          		<h2>Research & Read Business Reviews Before Buying</h2>
 				            <h1 class="mb-4">
                            Product reviews for the customer obsessed</h1>
-				            <p><a href="products.html" class="btn btn-primary">Start the experience</a></p>
+				            <p><a href="/Products" class="btn btn-primary">Start the experience</a></p>
 			            </div>
 			          </div>
 			        </div>
@@ -263,7 +272,7 @@
 
   
 
-      <section class="ftco-section" id="concept">
+      <section class="ftco-section" id="about">
       <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -491,22 +500,24 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/jquery.timepicker.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
+       <script th:src="@{../js/jquery.min.js}" ></script>
+        <script th:src="@{../js/jquery-migrate-3.0.1.min.js}"></script>
+        <script th:src="@{../js/popper.min.js}"></script>
+        <script th:src="@{../js/bootstrap.min.js}" ></script>
+        <script th:src="@{../js/jquery.easing.1.3.js}"></script>
+        <script th:src="@{../js/jquery.waypoints.min.js}"></script>
+        <script th:src="@{../js/jquery.stellar.min.js}"></script>
+        <script th:src="@{../js/jquery.animateNumber.min.js}"></script>
+        <script th:src="@{../js/bootstrap-datepicker.js}"></script>
+        <script th:src="@{../js/jquery.timepicker.min.js}"></script>
+        <script th:src="@{../js/owl.carousel.min.js}"></script>
+        <script th:src="@{../js/jquery.magnific-popup.min.js}"></script>
+        <script th:src="@{../js/scrollax.min.js}"></script>
+  		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  		<script th:src="@{../js/google-map.js}"></script>
+        <script th:src="@{../js/main.js}"></script>
     
+
+
   </body>
 </html>

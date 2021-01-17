@@ -96,6 +96,12 @@ public class UserServiceImp implements UserService {
         UserEntity oldUser = this.getUserEntityById(id);
         if (newUser.getUsername() != null)    
             oldUser.setUsername(newUser.getUsername());
+        if (newUser.getEmail() != null)    
+            oldUser.setEmail(newUser.getEmail());
+        if (newUser.getPassword() != null)    
+            oldUser.setPassword(newUser.getPassword());
+        if (newUser.getPhone() != null)    
+            oldUser.setPhone(newUser.getPhone());
         if (newUser.getBirthDate() != null)
             oldUser.setBirthDate(newUser.getBirthDate());
         if (newUser.getRole() != null)
@@ -279,9 +285,10 @@ public ProductEntity createProduct(String cat ,String nom, String marque , Strin
     
     }
     @Override
-    public ProductEntity deleteAvisEntity(int id) {
-        // TODO Auto-generated method stub
-        return null;
+    public AvisEntity deleteAvisEntity(int id) {
+    	AvisEntity a = this.getAvisById(id);
+        reposAvis.deleteById(id);
+    	return a;
     }
     
     public Float rate(int id) {
@@ -320,9 +327,15 @@ Optional<AvisEntity> opt = reposAvis.findById(id);
            if (newEntityAvis.getNbdislike()!= 0 )
                oldavis.setNbdislike(newEntityAvis.getNbdislike());
            if (newEntityAvis.getComment()!= null )
-                   oldavis.setComment(newEntityAvis.getComment());
-        
-           return reposAvis.save(oldavis);
+               oldavis.setComment(newEntityAvis.getComment());
+           if (newEntityAvis.getQalityPrice()!= -1 )
+               oldavis.setQalityPrice(newEntityAvis.getQalityPrice());
+           if (newEntityAvis.getCameraquality()!= -1 )
+               oldavis.setCameraquality(newEntityAvis.getCameraquality());
+           if (newEntityAvis.getDesign()!= -1 )
+               oldavis.setDesign(newEntityAvis.getDesign());
+           
+         return reposAvis.save(oldavis);
         
     }
 

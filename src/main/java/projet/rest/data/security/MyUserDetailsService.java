@@ -19,8 +19,8 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Autowired
     private UserRepository userRepo;
     @Override
-public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException {
-    UserEntity user =userRepo.findByUsername(username);
+public UserDetails loadUserByUsername(String email)  throws UsernameNotFoundException {
+    	UserEntity user =userRepo.findByEmail(email);
         if(user==null)
             throw new UsernameNotFoundException("User Not Found ! ! !");
         return new UserPrincipal(user);

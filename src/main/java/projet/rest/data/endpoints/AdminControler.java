@@ -1,17 +1,21 @@
 package projet.rest.data.endpoints;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,15 +29,17 @@ import projet.rest.data.services.UserService;
 @Controller
 @Data
 @AllArgsConstructor
+@RequestMapping("/admin")
 public class AdminControler {
 	@Autowired
 	UserService service ;
-	@GetMapping("/admin")
+	@GetMapping("/home")
 	public String returnindexadmin() {
 	    return "admin/indexadmin";
 	}
 	
 	/*Users*/
+	
 	@GetMapping("/userlist")
 	public String AllUsers(Model model) {
 		List<UserEntity> users =  service.getAllUserEntity();
@@ -60,9 +66,25 @@ public class AdminControler {
 	    service.deleteUserEntity(id);
 		return this.AllUsers(model);
 	}
-	@GetMapping("/upduser")
-	public String UpdUsers() {
+	@GetMapping("/upduser/{id}")
+	public String UpdUsers(@PathVariable("id") int id, Model model) {
+		UserEntity user = service.getUserEntityById(id);
+		model.addAttribute("user", user);
 	    return "admin/upduseradmin";
+	}
+	@PostMapping("/upduseradmin/{id}")
+	public String EditSuucesUser( Model model ,@PathVariable("id") long id ,@RequestParam ("username") String username , @RequestParam ("email") String email , @RequestParam("password") String password, @RequestParam("phone") String phone,@RequestParam ("birthDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date birthDate,@RequestParam("Role") String Role  ) {
+ 
+		 UserEntity user =new UserEntity();
+		 user.setUsername(username);
+		 user.setEmail(email);
+		 user.setPassword(password);
+		 user.setPhone(phone);
+		 user.setBirthDate(birthDate);
+		 user.setRole(Role);
+		 
+		 service.modifyUserEntity(id, user);
+		return this.AllUsers(model);
 	}
 	
 	/*Categories*/
@@ -138,62 +160,74 @@ public class AdminControler {
 	@PostMapping("/updproductadmin/{id}")
 	public String EditSuuces( Model model ,@PathVariable("id") int i ,@RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description,@RequestParam ("file") MultipartFile file  ) {
  
- ProductEntity p1 = new ProductEntity();
- p1.setCatname(catname);
- p1.setNom(nom);
- p1.setDescription(description);
- p1.setMarque(marque);
- String FileName = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
-	if(FileName.contains("..")) {
-		System.out.println("not a proper file ");
-	}
-	try {
-		p1.setImg(Base64.getEncoder().encodeToString(file.getBytes()));
-	} catch (IOException e) {
-		
-		e.printStackTrace();
-	}
- service.modifyProduct(i, p1);
+		 ProductEntity p1 = new ProductEntity();
+		 p1.setCatname(catname);
+		 p1.setNom(nom);
+		 p1.setDescription(description);
+		 p1.setMarque(marque);
+		 String FileName = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+			if(FileName.contains("..")) {
+				System.out.println("not a proper file ");
+			}
+			try {
+				p1.setImg(Base64.getEncoder().encodeToString(file.getBytes()));
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		 service.modifyProduct(i, p1);
 		return this.AllProducts(model);
-		}
-	
-
-	
+	}
 	
 	/*Reviews*/
+	
 	@GetMapping("/reviewlist")
 	public String AllReviews(Model model) {
-	List<ProductEntity> products = new ArrayList<ProductEntity>();
-	for(ProductEntity p1 : service.getAllProduct())
-	{
-		if(p1.getAvis().size()>0)
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		for(ProductEntity p1 : service.getAllProduct())
 		{
-			products.add(p1);
-			
+			if(p1.getAvis().size()>0)
+			{
+				products.add(p1);
+			}
 		}
-		
-	}
-	ProductEntity p = new ProductEntity();
-	AvisEntity a = new AvisEntity();
-	model.addAttribute("products",products);
-	model.addAttribute("product",p);
-	model.addAttribute("a",a);
+		ProductEntity p = new ProductEntity();
+		AvisEntity a = new AvisEntity();
+		model.addAttribute("products",products);
+		model.addAttribute("product",p);
+		model.addAttribute("a",a);
 	
 	    return "admin/reviewlistadmin";
 	}
-	@GetMapping("/addreview")
-	public String AddReviews() {
-	    return "admin/addreviewadmin";
+
+	@GetMapping("/delreview/{id}")
+	public String DelReviews(@PathVariable("id") int id, Model model) {
+		service.deleteAvisEntity(id);
+		return this.AllReviews(model);
+	    
 	}
-	@GetMapping("/delreview")
-	public String DelReviews() {
-	    return "admin/delreviewadmin";
-	}
-	@GetMapping("/updreview")
-	public String UpdReviews() {
-		
+	
+	
+	@GetMapping("/updreview/{id}")
+	public String UpdReviews(@PathVariable("id") int id, Model model) {
+		AvisEntity avis = service.getAvisById(id);
+		model.addAttribute("avis", avis);
 	    return "admin/updreviewadmin";
 	}
+	@PostMapping("/updreviewadmin/{id}")
+	public String EditSuucesReview( Model model ,@PathVariable("id") int id ,@RequestParam ("QalityPrice") float QalityPrice , @RequestParam ("cameraquality") float cameraquality , @RequestParam("design") float design, @RequestParam("comment") String comment  ) {
+ 
+		 AvisEntity a =new AvisEntity();
+		 a.setQalityPrice(QalityPrice);
+		 a.setCameraquality(cameraquality);
+		 a.setDesign(design);
+		 a.setComment(comment);
+		 
+		 service.modifyAvis(id, a);
+		return this.AllReviews(model);
+	}
+	
+	
 	@GetMapping("/reportreview")
 	public String ReportReviews() {
 	    return "admin/reportreviewadmin";

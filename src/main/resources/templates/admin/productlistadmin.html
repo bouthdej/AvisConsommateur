@@ -63,9 +63,9 @@
 				<td th:utext="${product.rate}" ></td>
 				<td>
 					<a th:href="@{/delproduct/{id}(id=${product.idp})}" aria-hidden="true" class="btn btn-danger mt">Delete</a>
-				
 				</td>
-				<td> 				<a th:href="@{/updproduct/{id}(id=${product.idp})}"   aria-hidden="true" class="btn btn-info mt">edit</a>
+				<td> 
+					<a th:href="@{/updproduct/{id}(id=${product.idp})}"   aria-hidden="true" class="btn btn-info mt">edit</a>
 				</td>
 			</tr>
 		</table>

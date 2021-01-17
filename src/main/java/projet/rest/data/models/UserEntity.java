@@ -4,6 +4,7 @@ package projet.rest.data.models;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,15 +37,8 @@ private long id; //auto generé
 //@Column(name = "First Name",length = 50,nullable = false)
 private String username;
 private String password; //prof qal mayet7atech el password fel table houni
-private LocalDate birthDate = LocalDate.now();
-public void setBirthDate(String date) {
-	birthDate = LocalDate.parse(date);
-}
-
-public String getBirthDate() {
-	DateTimeFormatter f= DateTimeFormatter.ofPattern("dd, MMMM yyyy");
-	return birthDate.format(f);
-}
+@DateTimeFormat(pattern="yyyy-MM-dd")
+private Date birthDate;
 private String email;
 private String phone;
 private String Role;

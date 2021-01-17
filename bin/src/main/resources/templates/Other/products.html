@@ -124,13 +124,9 @@
                   <div class="img author" style="background-image: url(static/images//CustomerReview/src/main/resources/static/images/no-image.jpg);" ></div>
                   <div class="desc pl-3">
                     <span th:value=" ${product.nom}" th:text="${product.nom}"></span>
-                    <span><i class="fa fa-star checked"></i>
-                      <i class="fa fa-star checked"></i>
-                      <i class="fa fa-star-half-o checked"></i>
-                      <i class="fa fa-star-o checked"></i>
-                      <i class="fa fa-star-o checked"></i>
-                       <small> 100 reviews</small> 
-                    </span>
+                   
+                       <small th:value=" ${product.avis.size()}" th:text="${product.avis.size()}" > </small> 
+                 
                   </div>
                 </div>
                 <div class="desc ">
@@ -138,7 +134,7 @@
                  
                 </div>
                 <h3 class="heading" th:value="${product.nom}" th:text="${product.nom}"><a href="#"></a></h3>
-                <div>24 March 2020</div>
+                <div th:value="${product.dateofcreation}" th:text="${product.dateofcreation}" ></div>
               </div>
             </div>
           </div>
@@ -151,6 +147,8 @@
                   </div>
                   <div class="tab-pane container p-0 fade" id="services-2">
                  <!---------------------------- washer ------------> 
+                 
+                 
                   </div>
                   <div class="tab-pane container p-0 fade" id="services-3">
                    

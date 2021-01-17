@@ -37,18 +37,27 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 		return provider;
 	}
 	
-	/*@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http
-			.csrf().disable()
-			.authorizeRequests().antMatchers("/Login").permitAll()
-			.anyRequest().authenticated()
-			.and()
-			.logout().invalidateHttpSession(true)
-			.clearAuthentication(true)
-			.logoutRequestMatcher(new AntPathRequestMatcher("/Logout"))
-			.logoutSuccessUrl("Logout-Success").permitAll();
-	}*/
+		.authorizeRequests()
+		.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/scss/**","/static/**")
+		.permitAll()
+		.antMatchers("/user/**").hasAnyAuthority("ADMIN","USER")
+		.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
+        .anyRequest().permitAll()
+        .and()
+        .formLogin()
+        .loginPage("/Login").permitAll()
+        .usernameParameter("email")
+        //.defaultSuccessUrl("/user/user", true) //lazem taba3thek win konet ou par default l home
+        .defaultSuccessUrl("/default")
+        .and()
+		.logout().invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/logout-Success").permitAll();
+
+	}
 	
 }
