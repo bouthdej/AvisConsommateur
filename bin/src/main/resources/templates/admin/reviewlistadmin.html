@@ -27,45 +27,44 @@
 		<table border="1" class="table">
 			<tr class="thead-light">
 				<th rowspan="2">Product</th>
-				<th colspan="6">Reviews</th>
+				<th colspan="8">Reviews</th>
 				
 			</tr>
-			<tr class="thead">
-		
-			<th>Quality/Price</th>
-			<th>Camera Quality</th>
-			<th>Durability</th>
-			<th>Design</th>
-			<th>Autonomy</th>
-						<th>Delete</th>
-			
+			<tr class="thead" >
+				<th>Quality/Price</th>
+				<th>Camera Quality</th>
+				<th>Design</th>
+				<th>Comment</th>
+				<th>Nb like</th>
+				<th>Nb dislike</th>
+				<th>Delete</th>
+				<th >Edit</th>
 			</tr>
 			
 			 <div th:each="product : ${products}">
-	<tr >		
-    <td th:rowspan="${product.avis.size()+1}" th:utext="${product.nom}" ></td>
-    
-      <tr th:each="a : ${product.avis}">
-  <div>
-   <td  th:utext="${a.QalityPrice}" ></td>
-				<td th:utext="${a.cameraquality}" ></td>
-				<td th:utext="${a.dateofcreation}" ></td>
-				 <td  th:utext="${a.QalityPrice}" ></td>
-				<td th:utext="${a.cameraquality}" ></td>
-					<td >
-					<a th:href="@{/delproduct/{id}(id=${product.idp})}" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i></a>
-				</td>
-				
-</div>
-</tr>
+				<tr >		
+			    <td th:rowspan="${product.avis.size()+1}" th:utext="${product.nom}" ></td>
+			    
+			      <tr th:each="a : ${product.avis}">
+			  		<div>
+				   		<td  th:utext="${a.QalityPrice}" ></td>
+						<td th:utext="${a.cameraquality}" ></td>
+						<td th:utext="${a.design}" ></td>
+						<td th:utext="${a.comment}" ></td>
+						<td th:utext="${a.nblike}" ></td>
+						<td th:utext="${a.nbdislike}" ></td>
+						<td >
+							<a th:href="@{/delreview/{id}(id=${a.id})}" class="btn btn-danger mt" >Delete</a>
+						</td>
+						<td> 
+							<a th:href="@{/updreview/{id}(id=${a.id})}"   aria-hidden="true" class="btn btn-info mt">Edit</a>
+						</td>
+					</div>
+				  </tr>
 
-</tr>
- </div>
-    
-    
-    
- 
-		
+				</tr>
+ 			</div>
+
 		</table>
 		
 	</div>

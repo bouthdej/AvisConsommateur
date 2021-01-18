@@ -39,13 +39,10 @@ public class UserController {
 		model.addAttribute("Category",c);
 	    return "user/add-categories";
 	}
-	@GetMapping("/forgotpass")
-	public String forgotpass() {
-	    return "/user/forgot-password";
-	}
+
 	@GetMapping("/home")
 	public String userindex() {
-	    return "/user/userindex";
+	    return "user/userindex";
 	}
 
 	

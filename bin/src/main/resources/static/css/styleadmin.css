@@ -1364,6 +1364,7 @@ pre {
     border: 1px solid #dee2e6; }
   .table-bordered thead th,
   .table-bordered thead td {
+  border-color:#dee2e6;
     border-bottom-width: 2px; }
 
 .table-borderless th,
@@ -1534,7 +1535,11 @@ pre {
   color: #495057;
   background-color: #e9ecef;
   border-color: #dee2e6; }
-
+.thead-x{
+	color: #fff;
+  background-color: #ffff00;
+  border-color:#000000;
+}
 .table-dark {
   color: #fff;
   background-color: #212529; }

@@ -120,7 +120,7 @@ public class Controlerr {
 	
 	@GetMapping("/logout-Success")
 	public String logout() {
-	    return "/index";
+	    return "redirect:/Login";
 	}
 	
 	@GetMapping("/Sign-up")
@@ -144,6 +144,10 @@ public class Controlerr {
 		service.createUserEntity(user);
 		SendEmailService.welcomeMail(user.getEmail(),user.getUsername());
 		return "Other/login";
+	}
+	@GetMapping("/forgotpass")
+	public String forgotpass() {
+	    return "Other/forgot-password";
 	}
 	
 	@GetMapping("/register")

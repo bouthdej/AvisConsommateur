@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Login</title>
     <meta charset="utf-8">
@@ -7,19 +7,19 @@
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
  
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" th:href="@{../css/animate.css}">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" th:href="@{../css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{../css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{../css/magnific-popup.css}">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" th:href="@{../css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{../css/jquery.timepicker.css}">
 
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{../css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
 
   </head>
   <body>
@@ -92,12 +92,17 @@
                 <div class="col-md-6  d-flex">
                   <div class="contact-wrap w-100 p-md-5 p-4">
                     <h3 class="mb-4">Login</h3>
-
-                    <form method="POST" id="contactForm" class="contactForm">
+                    <form th:action="@{/Login}" method="POST" id="contactForm" class="contactForm">
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                        <input type="text" class="form-control" name="Username" id="username" placeholder="Username">
+                          <div th:if="${param.error}" class="alert alert-error">    
+			                    Invalid email or password.
+			                </div>
+			                <div th:if="${param.logout}" class="alert alert-success"> 
+			                    You have been logged out.
+			                </div>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email">
                           </div>
                         </div>
                          <div class="col-md-12"> 
