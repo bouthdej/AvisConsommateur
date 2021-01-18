@@ -38,4 +38,22 @@ public class SendEmailService {
 		mail.setText(body);
 		javaMailSender.send(mail);
 	}
+	
+	public void welcomeMail(String to,String username) {
+		String body,topic;
+		Properties authProps = new Properties();
+		authProps.put("mail.smtp","587");
+		SimpleMailMessage mail=new SimpleMailMessage();
+		mail.setFrom("youradvancer@gmail.com");
+		mail.setTo(to);
+		topic= " Welcome "+username+" to Your-Advancer Community";
+		mail.setSubject(topic);
+		body="Welcome to Your Advancer \r\n"
+				+ "Access in-depth resources\r\n"
+				+ "Take advantage of available resources to solve problems and advance your career."
+				+ " Check out our developer"
+				+ " how-tos and getting started guides, videos, cheat sheets, and more.";
+		mail.setText(body);
+		javaMailSender.send(mail);
+	}
 }

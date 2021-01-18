@@ -37,17 +37,37 @@ public class UserController {
 	public String AddCategories(Model model) {
 		CategoryEntity c = new CategoryEntity() ;
 		model.addAttribute("Category",c);
-	    return "forms/add-categories";
+	    return "user/add-categories";
 	}
 	@GetMapping("/forgotpass")
 	public String forgotpass() {
-	    return "aa/forgot-password";
+	    return "/user/forgot-password";
 	}
 	@GetMapping("/home")
 	public String userindex() {
 	    return "/user/userindex";
 	}
 
+	
+	@GetMapping("/Products")
+	public String AllProducts(Model model ) { 
+		List <ProductEntity> products = service.getAllProduct();
+		ProductEntity product = new ProductEntity();
+		model.addAttribute("product", product);
+		model.addAttribute("products", products);
+		List <CategoryEntity> categories = service.getAllCategories() ;
+			CategoryEntity category = new CategoryEntity();
+			model.addAttribute("category", category);
+			if(categories.isEmpty()==false)
+			{
+			model.addAttribute("categories",categories);
+		    return "user/products";
+		}
+			else {
+				
+		return "user/productsnotfounds";}
+	}
+	
 	@GetMapping("/add-product")
 	public String addProduct(Model model) {
 		
@@ -56,18 +76,18 @@ public class UserController {
 		CategoryEntity cat = new CategoryEntity ();
 		model.addAttribute("category",cat);
 		
-		return "forms/add-product";
+		return "user/add-product";
 	}
 	
 	@PostMapping("/add-product")
 	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
 		service.createProduct(catname,nom,marque,description,file);
-		return "forms/productcreated";
+		return "user/Products";
 	}
 	@PostMapping("/add-categories")
 	public String registerSuccess(@ModelAttribute("Category") CategoryEntity Category) {
 		service.createCategory(Category);
-		return "forms/productcreated";
+		return "user/productcreated";
 	}
 	
 	@GetMapping("/add-review/{id}")
@@ -77,7 +97,7 @@ public class UserController {
 		ProductEntity p = service.getProductById(id);
 		model.addAttribute("product",p);
 		
-		return "Reviews/add-review";
+		return "user/add-review";
 	}
 	@PostMapping("/add-review/{id}")
 	public String ReviewSuccess(@ModelAttribute("avis") AvisEntity a , @ModelAttribute("product") ProductEntity p) {
@@ -90,11 +110,24 @@ public class UserController {
 			//a.toString();
 		}
 		catch(NoSuchElementException e) {
-			return "Reviews/ProductNotFound";
+			return "user/ProductNotFound";
 		}
 		p.setRate(service.rate(i));
-		return "Reviews/reviewcreated";
+		return "user/reviewcreated";
 	}
 
+	
+	@GetMapping("/Contact")
+	public String Contact(Model model) {
+	    return "user/contact";
+	}
+	
+	@PostMapping("/Contact")
+	public String ContactMail(@RequestParam("email") String to,@RequestParam("message") String body, @RequestParam("subject") String topic,@RequestParam("name") String name) {
+		System.out.println("Sending : "+to+" "+body+" "+topic);
+		SendEmailService.sendEmail(to,body,"By "+name+": "+topic);
+		System.out.println("Success : "+to+" "+body+" "+topic);
+	    return "user/contact";
+	}
 
 }

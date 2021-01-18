@@ -40,15 +40,30 @@ public class Controlerr {
     SendEmailService SendEmailService;
 	
 	@GetMapping("/")
-	public String returnindex(HttpServletRequest request) {
-		if (request.isUserInRole("USER")) {
-	        return "redirect:/user/user";
+	public String returnindex() {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();
+	    String user = "USER";
+	    
+	    if (myRole.equals(user)) {
+	        return "redirect:/user/home";
 	    }
 	    return "/index";
 	}
 
     @GetMapping("/Products")
 	public String AllProducts(Model model ) { 
+    	Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();
+	    String user = "USER";
+	    
+	    if (myRole.equals(user)) {
+	        return "redirect:/user/Products";
+	    }
 		List <ProductEntity> products = service.getAllProduct();
 		ProductEntity product = new ProductEntity();
 		model.addAttribute("product", product);
@@ -69,6 +84,15 @@ public class Controlerr {
 
 	@GetMapping("/Contact")
 	public String Contact(Model model) {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();
+	    String user = "USER";
+	    
+	    if (myRole.equals(user)) {
+	        return "redirect:/user/Contact";
+	    }
 	    return "Other/contact";
 	}
 	
@@ -82,6 +106,15 @@ public class Controlerr {
 	
 	@GetMapping("/Login")
 	public String login() {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();
+	    String user = "USER";
+	    
+	    if (myRole.equals(user)) {
+	        return "redirect:/user/home";
+	    }
 	    return "Other/login";
 	}
 	
@@ -92,14 +125,24 @@ public class Controlerr {
 	
 	@GetMapping("/Sign-up")
 	public String SignUp(Model model) {
-		UserEntity user = new UserEntity();
-		model.addAttribute("user",user);
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();
+	    String user = "USER";
+	    
+	    if (myRole.equals(user)) {
+	        return "redirect:/user/home";
+	    }
+		UserEntity userentity = new UserEntity();
+		model.addAttribute("user",userentity);
 		return "Other/Sign-up";
 	}
 	
 	@PostMapping("/Sign-up")
 	public String UserregisterSuccess(@ModelAttribute("user") UserEntity user) {
 		service.createUserEntity(user);
+		SendEmailService.welcomeMail(user.getEmail(),user.getUsername());
 		return "Other/login";
 	}
 	
