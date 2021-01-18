@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -149,6 +150,18 @@ public class Controlerr {
 	public String forgotpass() {
 	    return "Other/forgot-password";
 	}
+	
+	/*forgot password eli bech yab3atha l admin fi email*/
+	@GetMapping("/forgotpass2")
+	public String forgotpass2() {		
+	    return "Other/forgotpass_part2";
+	}
+	
+	@PostMapping("/forgotpass2")
+	public String updPassword() {	
+		return "Other/forgotpass_part2";
+	}
+	
 	
 	@GetMapping("/register")
 	public String register() {
