@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Your advancer - Forgot Password Part2</title>
     <meta charset="utf-8">
@@ -61,12 +61,12 @@
                                         <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
                               			<hr>
                                     </div>
-                                    <form  method="POST"  onsubmit="return valider()">
+                                    <form  method="POST" th:object="${user}" th:action="@{/change-password/{confirmationToken}(confirmationToken=${token.confirmationToken})}"  onsubmit="return valider()">
                                         <div class="form-group">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="New Password...">
+                                            <input type="password" name="password1" id="password1" class="form-control" placeholder="New Password...">
                                         </div> 
                                         <div class="form-group">
-                                            <input type="password" name="confirm_password" id="confirm_password" class="form-control"  placeholder="Confirm new password..." onkeyup="check_pass()">
+                                            <input type="password" name="password" th:field="*{password}" id="confirm_password" class="form-control"  placeholder="Confirm new password..." onkeyup="check_pass()">
                                             <span id="message"></span>
                                         </div>
                                         <div class="form-group">

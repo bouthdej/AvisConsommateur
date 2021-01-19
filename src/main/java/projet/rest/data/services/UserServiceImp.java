@@ -9,17 +9,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
- 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import projet.rest.data.models.AvisEntity;
-
- 
-
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
 import projet.rest.data.models.UserEntity;
@@ -61,7 +56,7 @@ public class UserServiceImp implements UserService {
     }
     
 
- 
+
 
 
     @Override
@@ -75,9 +70,6 @@ public class UserServiceImp implements UserService {
             throw new NoSuchElementException("User with id : "+id+" is not found");
         return entity; 
     }
-
- 
-
    
        @Override
        public UserEntity createUserEntity(UserEntity entity) {
@@ -89,25 +81,28 @@ public class UserServiceImp implements UserService {
                    return user;
        }
 
- 
+      
 
     @Override
-    public UserEntity modifyUserEntity(long id, UserEntity newUser) {
+    public void modifyUserEntity(long id, UserEntity newUser) {
         UserEntity oldUser = this.getUserEntityById(id);
         if (newUser.getUsername() != null)    
             oldUser.setUsername(newUser.getUsername());
         if (newUser.getEmail() != null)    
             oldUser.setEmail(newUser.getEmail());
-        if (newUser.getPassword() != null)    
-            oldUser.setPassword(newUser.getPassword());
+        if (newUser.getPassword() != null)
+        {   oldUser.setPassword(newUser.getPassword());
+        	String password = bCryptPasswordEncoder.encode(newUser.getPassword());
+        	oldUser.setPassword(password);
+        }
         if (newUser.getPhone() != null)    
             oldUser.setPhone(newUser.getPhone());
         if (newUser.getBirthDate() != null)
             oldUser.setBirthDate(newUser.getBirthDate());
         if (newUser.getRole() != null)
             oldUser.setRole(newUser.getRole());
-        
-        return reposUser.save(oldUser); // 
+        reposUser.save(oldUser);
+        //return reposUser.save(oldUser); // 
     }
     @Override
     public UserEntity deleteUserEntity(long id) {

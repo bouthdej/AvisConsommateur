@@ -13,7 +13,7 @@ public interface UserService {
     List<UserEntity> getAllUserEntity();
     UserEntity getUserEntityById(long id);
     UserEntity createUserEntity(UserEntity entity );
-    UserEntity modifyUserEntity(long id,UserEntity newentity);
+    void modifyUserEntity(long id,UserEntity newentity);
     UserEntity deleteUserEntity(long id);
     //List<AvisEntity>    getAllAvisEntity();
     

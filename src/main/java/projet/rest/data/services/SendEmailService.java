@@ -56,4 +56,24 @@ public class SendEmailService {
 		mail.setText(body);
 		javaMailSender.send(mail);
 	}
+	public void verifyEmail(String to,String topic,String body) {
+		Properties authProps = new Properties();
+		authProps.put("mail.smtp","587");
+		SimpleMailMessage mail=new SimpleMailMessage();
+		mail.setFrom("youradvancer@gmail.com");
+		mail.setTo(to);
+		mail.setSubject(topic);
+		mail.setText(body);
+		javaMailSender.send(mail);
+	}
+	public void changePassword(String to,String topic,String body) {
+		Properties authProps = new Properties();
+		authProps.put("mail.smtp","587");
+		SimpleMailMessage mail=new SimpleMailMessage();
+		mail.setFrom("youradvancer@gmail.com");
+		mail.setTo(to);
+		mail.setSubject(topic);
+		mail.setText(body);
+		javaMailSender.send(mail);
+	}
 }
