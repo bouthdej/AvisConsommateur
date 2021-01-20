@@ -34,6 +34,7 @@ public class ConfirmationToken {
     @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private UserEntity user;
+    private int expired=0;
 
     public ConfirmationToken(UserEntity user) {
         this.user = user;

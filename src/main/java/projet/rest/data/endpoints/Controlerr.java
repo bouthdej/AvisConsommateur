@@ -155,6 +155,8 @@ public class Controlerr {
 	@GetMapping("/change-password/{confirmationToken}")
 	public String updPassword(Model model,@PathVariable String confirmationToken) {
 		 ConfirmationToken token = conftrepo.findByConfirmationToken(confirmationToken);
+		 if (token.getExpired()==1)
+	        	return "redirect:/Login";
 		 UserEntity user = userrepo.findByEmail(token.getUser().getEmail());
 			model.addAttribute("user",user);
 			model.addAttribute("token",token);
@@ -170,6 +172,8 @@ public class Controlerr {
         olduser.setPassword(user.getPassword());
         System.out.println("Passworrrrd = "+olduser.getPassword());
         service.modifyUserEntity(olduser.getId(), olduser);
+        token.setExpired(1);
+		conftrepo.save(token);
 		redirAttrs.addFlashAttribute("success", "Password Modified Successfully");
 
 		return "redirect:/Login";
@@ -240,10 +244,15 @@ public class Controlerr {
     public String confirmUserAccount(@PathVariable String confirmationToken, RedirectAttributes redirAttrs)
     {	
         ConfirmationToken token = conftrepo.findByConfirmationToken(confirmationToken);
+        if (token.getExpired()==1)
+        	return "redirect:/Login";
+        
         UserEntity user = userrepo.findByEmail(token.getUser().getEmail());
 		user.setIsEnabled(1);
 		userrepo.save(user);
 		SendEmailService.welcomeMail(user.getEmail(),user.getUsername());
+		token.setExpired(1);
+		conftrepo.save(token);
 		redirAttrs.addFlashAttribute("success", "Account Activated! Try to Login");
 		return "redirect:/Login";
 
