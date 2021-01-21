@@ -75,7 +75,7 @@ public class UserServiceImp implements UserService {
        public UserEntity createUserEntity(UserEntity entity) {
        	String password = bCryptPasswordEncoder.encode(entity.getPassword());
        	entity.setPassword(password);
-       	entity.setRole("USER");
+       	entity.setRole("NOTVERIFIED");
                    UserEntity user = reposUser.save(entity);
                                    
                    return user;

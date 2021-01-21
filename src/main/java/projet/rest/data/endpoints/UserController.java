@@ -1,9 +1,14 @@
 package projet.rest.data.endpoints;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ProductEntity;
+import projet.rest.data.models.UserEntity;
+import projet.rest.data.repositories.UserRepository;
 import projet.rest.data.services.SendEmailService;
 import projet.rest.data.services.UserService;
 
@@ -32,7 +40,17 @@ public class UserController {
 	
 	@Autowired
 	SendEmailService SendEmailService;
-	
+	public String getUserUsername() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username ;
+		if (principal instanceof UserDetails) {
+		 username = ((UserDetails)principal).getUsername();
+		} else {
+		 username = principal.toString();
+		}
+		return username;
+	}
+	UserRepository userrepo;
 	@GetMapping("/add-categories")
 	public String AddCategories(Model model) {
 		CategoryEntity c = new CategoryEntity() ;
@@ -41,7 +59,19 @@ public class UserController {
 	}
 
 	@GetMapping("/home")
-	public String userindex() {
+	public String userindex(Model model,RedirectAttributes redirAttrs) {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();		
+		if (myRole.equals("NOTVERIFIED")) 
+			{
+			return "redirect:/logout";
+	    	}
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		model.addAttribute("user",user);
+
+	    	
 	    return "user/userindex";
 	}
 
@@ -52,6 +82,8 @@ public class UserController {
 		ProductEntity product = new ProductEntity();
 		model.addAttribute("product", product);
 		model.addAttribute("products", products);
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		model.addAttribute("user",user);
 		List <CategoryEntity> categories = service.getAllCategories() ;
 			CategoryEntity category = new CategoryEntity();
 			model.addAttribute("category", category);
@@ -61,18 +93,26 @@ public class UserController {
 		    return "user/products";
 		}
 			else {
-				
+			
 		return "user/productsnotfounds";}
 	}
 	
 	@GetMapping("/add-product")
 	public String addProduct(Model model) {
-		
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	    String myRole = authorities.toArray()[0].toString();		
+		if (myRole.equals("NOTVERIFIED")) 
+			{
+			return "redirect:/logout";
+	    	}
 		List<CategoryEntity> categories = service.getAllCategories();
 		model.addAttribute("categories",categories);
 		CategoryEntity cat = new CategoryEntity ();
 		model.addAttribute("category",cat);
-		
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		model.addAttribute("user",user);
 		return "user/add-product";
 	}
 	
@@ -93,7 +133,8 @@ public class UserController {
 		model.addAttribute("avis",a);
 		ProductEntity p = service.getProductById(id);
 		model.addAttribute("product",p);
-		
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		model.addAttribute("user",user);
 		return "user/add-review";
 	}
 	@PostMapping("/add-review/{id}")
@@ -116,6 +157,8 @@ public class UserController {
 	
 	@GetMapping("/Contact")
 	public String Contact(Model model) {
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		model.addAttribute("user",user);
 	    return "user/contact";
 	}
 	

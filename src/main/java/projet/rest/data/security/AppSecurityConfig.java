@@ -10,10 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
@@ -43,6 +40,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/scss/**","/static/**")
 		.permitAll()
+		.antMatchers("/user/home").hasAnyAuthority("ADMIN","USER","NOTVERIFIED")
+		.antMatchers("/user/add-product").hasAnyAuthority("ADMIN","USER","NOTVERIFIED")
 		.antMatchers("/user/**").hasAnyAuthority("ADMIN","USER")
 		.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
         .anyRequest().permitAll()

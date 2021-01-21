@@ -32,9 +32,9 @@ private Date birthDate;
 private String email;
 private String phone;
 private String Role;
-private int isEnabled=0;
 @ManyToMany(mappedBy = "LikedBy", cascade = CascadeType.REMOVE)
 private List<AvisEntity> Likedavis;
 @ManyToMany(mappedBy = "dislikedBy", cascade = CascadeType.REMOVE)
 private List<AvisEntity> DisLikedavis;
+
 }

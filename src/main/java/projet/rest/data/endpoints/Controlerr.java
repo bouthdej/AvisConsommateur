@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ConfirmationToken;
 import projet.rest.data.models.ProductEntity;
@@ -112,13 +111,13 @@ public class Controlerr {
 	    authorities = auth.getAuthorities();
 	    String myRole = authorities.toArray()[0].toString();
 	    String user = "USER";
-	    
 	    if (myRole.equals(user)) {
 	        return "redirect:/user/home";
 	    }
 	    
 	    return "Other/login";
 	}
+	
 	
 	@GetMapping("/logout-Success")
 	public String logout() {
@@ -189,9 +188,10 @@ public class Controlerr {
 	    String myRole = authorities.toArray()[0].toString();
 	    String user = "USER";
 	    
-	    if (myRole.equals(user)) {
+	    if (myRole.equals(user)||myRole.equals("NOTVERIFIED")) {
 	        return "redirect:/user/home";
 	    }
+	    
 	    return "redirect:/admin/home";
 	}
 	
@@ -248,7 +248,7 @@ public class Controlerr {
         	return "redirect:/Login";
         
         UserEntity user = userrepo.findByEmail(token.getUser().getEmail());
-		user.setIsEnabled(1);
+        user.setRole("USER");
 		userrepo.save(user);
 		SendEmailService.welcomeMail(user.getEmail(),user.getUsername());
 		token.setExpired(1);

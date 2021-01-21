@@ -5,13 +5,9 @@ package projet.rest.data.security;
 import java.util.Collection;
 import java.util.Collections;
 
- 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
- 
 
 import projet.rest.data.models.UserEntity;
 
