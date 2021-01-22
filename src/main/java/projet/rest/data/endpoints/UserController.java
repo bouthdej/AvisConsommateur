@@ -118,7 +118,8 @@ public class UserController {
 	
 	@PostMapping("/add-product")
 	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
-		service.createProduct(catname,nom,marque,description,file);
+		
+		service.createProduct(catname,nom,marque,description,file,getUserUsername());
 		return "user/Products";
 	}
 	@PostMapping("/add-categories")
@@ -163,11 +164,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/Contact")
-	public String ContactMail(@RequestParam("email") String to,@RequestParam("message") String body, @RequestParam("subject") String topic,@RequestParam("name") String name) {
-		System.out.println("Sending : "+to+" "+body+" "+topic);
-		SendEmailService.sendEmail(to,body,"By "+name+": "+topic);
-		System.out.println("Success : "+to+" "+body+" "+topic);
-	    return "user/contact";
+	public String ContactMail(@RequestParam("message") String body, @RequestParam("subject") String topic) {
+		System.out.println("$$$$$$hello2");
+		UserEntity user = userrepo.findByUsername(getUserUsername());
+		System.out.println("Sending : "+user.getEmail()+getUserUsername()+body+" "+topic);
+		SendEmailService.sendEmail(user.getEmail(),body,"By "+getUserUsername()+": "+topic);
+		//System.out.println("Success : "+to+" "+body+" "+topic);
+	    return "redirect:/Contact";
 	}
 
 }

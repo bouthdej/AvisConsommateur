@@ -137,7 +137,7 @@ public class AdminControler {
 	}
 	@PostMapping("/addproductadmin")
 	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file , Model model ) {
-		service.createProduct(catname,nom,marque,description,file);
+		service.createProduct(catname,nom,marque,description,file,"admin");
 		 return (this.AllProducts(model));
 		
 	}

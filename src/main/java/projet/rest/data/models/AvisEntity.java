@@ -38,6 +38,7 @@ public  class AvisEntity {
     private float note;
     private String comment;
     private int userID;
+    private String username;
     @ManyToMany
     @JoinTable(name = "LikedBy")
     @JsonIgnore

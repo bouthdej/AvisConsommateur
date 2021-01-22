@@ -43,7 +43,7 @@ public class ProductEntity {
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String img; 
-
+	private String username;
 	private String description ;
 
 }

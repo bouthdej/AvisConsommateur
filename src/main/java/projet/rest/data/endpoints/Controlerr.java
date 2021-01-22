@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
 import projet.rest.data.models.ConfirmationToken;
 import projet.rest.data.models.ProductEntity;
@@ -40,7 +41,7 @@ public class Controlerr {
     SendEmailService SendEmailService;
 	
 	@GetMapping("/")
-	public String returnindex() {
+	public String returnindex(Model model) {
 		Collection<? extends GrantedAuthority> authorities;
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    authorities = auth.getAuthorities();
@@ -50,6 +51,16 @@ public class Controlerr {
 	    if (myRole.equals(user)) {
 	        return "redirect:/user/home";
 	    }
+	    List <ProductEntity> products = service.getAllProduct();
+	    ProductEntity prod = new ProductEntity();
+	    List <ProductEntity> prods = products.subList(Math.max(products.size() - 3, 0), products.size());
+	    model.addAttribute("prods", prods);
+	    model.addAttribute("prod", prod);
+	    List <AvisEntity> AllReviews = service.getAllReviews();
+	    AvisEntity review = new AvisEntity();
+	    List <AvisEntity> reviews = AllReviews.subList(Math.max(AllReviews.size() - 9, 0), AllReviews.size());
+	    model.addAttribute("reviews", reviews);
+	    model.addAttribute("review", review);
 	    return "/index";
 	}
 

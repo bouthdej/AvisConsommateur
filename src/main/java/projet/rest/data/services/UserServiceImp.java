@@ -230,13 +230,18 @@ Optional<ProductEntity> opt = reposProduct.findById(id);
             throw new NoSuchElementException("User with id : "+id+" is not found"); 
     }
     @Override
-public ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file ) {
+    public List<AvisEntity> getAllReviews() {
+    	return reposAvis.findAll() ;
+    }
+    @Override
+public ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file ,String username) {
         
     	ProductEntity productEntity = new ProductEntity ();
     	productEntity.setCatname(cat);
     	productEntity.setNom(nom);
     	productEntity.setMarque(marque);
     	productEntity.setDescription(description);
+    	productEntity.setUsername(username);
     	String FileName = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
     	if(FileName.contains("..")) {
     		System.out.println("not a proper file ");

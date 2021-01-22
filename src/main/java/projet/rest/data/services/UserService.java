@@ -28,7 +28,7 @@ public interface UserService {
     /**produit**/
     List<ProductEntity> getAllProduct() ; 
     ProductEntity getProductById( int id) ; 
-    ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file )   ; 
+    ProductEntity createProduct(String cat ,String nom, String marque , String description , MultipartFile file, String Username )   ; 
     ProductEntity modifyProduct ( int id , ProductEntity newEntityProd);
     ProductEntity deleteProductEntity( int id ) ; 
     Float rate( int id);
@@ -37,6 +37,7 @@ public interface UserService {
     public ProductEntity createAvis(int id, AvisEntity a ) ;
     AvisEntity deleteAvisEntity( int id ) ; 
     List<AvisEntity> getAllAvisEntity(int id);
+    List<AvisEntity> getAllReviews();
     AvisEntity getAvisById( int id) ; 
     AvisEntity modifyAvis( int id , AvisEntity newEntityAvis);
     public AvisEntity addLike(int id , long userid);
