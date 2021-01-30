@@ -248,13 +248,7 @@
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a review</h3>
                 <form action="#" class="p-5 bg-light" th:action="@{/add-review/{id}(id=${product.idp})}"  method="post">
-                  <div class="form-group">
-                    <label for="TitleReview">ID product *</label>
-                    <input type="text"  class="form-control" id="idproduct" th:value="${product.idp}" name="idp">
-                   
-                  </div>
 
-                   
                       	<label class="mb-4">Quality price *</label><br/>
                         <input type="range" min="0" max="5" value="3" class="qalityPrice" id="note"  th:value="${avis.QalityPrice}" name="QalityPrice">
                         <label><span  id="demo"></span></label><br/><br/>

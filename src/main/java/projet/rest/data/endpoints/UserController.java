@@ -74,6 +74,16 @@ public class UserController {
 			{
 			return "redirect:/logout";
 	    	}
+		List <ProductEntity> products = service.getAllProduct();
+	    ProductEntity prod = new ProductEntity();
+	    List <ProductEntity> prods = products.subList(Math.max(products.size() - 3, 0), products.size());
+	    model.addAttribute("prods", prods);
+	    model.addAttribute("prod", prod);
+	    List <AvisEntity> AllReviews = service.getAllReviews();
+	    AvisEntity review = new AvisEntity();
+	    List <AvisEntity> reviews = AllReviews.subList(Math.max(AllReviews.size() - 9, 0), AllReviews.size());
+	    model.addAttribute("reviews", reviews);
+	    model.addAttribute("review", review);
 		UserEntity user = userrepo.findByUsername(getUserUsername());
 		model.addAttribute("user",user);
 
@@ -105,11 +115,8 @@ public class UserController {
 	
 	@GetMapping("/add-product")
 	public String addProduct(Model model) {
-		Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();		
-		if (myRole.equals("NOTVERIFIED")) 
+				
+		if (CheckRole().equals("NOTVERIFIED")) 
 			{
 			return "redirect:/logout";
 	    	}
@@ -124,9 +131,8 @@ public class UserController {
 	
 	@PostMapping("/add-product")
 	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file ) {
-		
 		service.createProduct(catname,nom,marque,description,file,getUserUsername());
-		return "user/Products";
+		return "redirect:/user/Products";
 	}
 	@PostMapping("/add-categories")
 	public String registerSuccess(@ModelAttribute("Category") CategoryEntity Category) {

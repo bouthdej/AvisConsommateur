@@ -27,6 +27,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
+import projet.rest.data.models.ConfirmationToken;
 import projet.rest.data.models.ProductEntity;
 import projet.rest.data.models.UserEntity;
 import projet.rest.data.services.UserService;
@@ -81,7 +82,8 @@ public class AdminControler {
 	}
 	@GetMapping("/deluser/{id}")
 	public String DelUsers(@PathVariable("id") Long id, Model model) {
-	    service.deleteUserEntity(id);
+	    service.DelTokenByIdUser(id);
+		service.deleteUserEntity(id);
 		return this.AllUsers(model);
 	}
 	@GetMapping("/upduser/{id}")
@@ -129,7 +131,7 @@ public class AdminControler {
 	@GetMapping("/delcategorie/{id}")
 	public String DelCategories(@PathVariable("id") int id, Model model) {
 		service.deleteCategoryEntity(id);
-		return this.AllCategoris(model);
+		return "redirect:/admin/categorielist";
 	}
 	
 	/*Products*/
@@ -151,18 +153,20 @@ public class AdminControler {
 		model.addAttribute("categories",categories);
 		CategoryEntity cat = new CategoryEntity ();
 		model.addAttribute("category",cat);
+		
 	    return "admin/addproductadmin";
 	}
 	@PostMapping("/addproductadmin")
 	public String registerSuccess( @RequestParam ("pcat") String catname , @RequestParam ("pname") String nom , @RequestParam("marque") String marque, @RequestParam("desc") String description , @RequestParam ("file") MultipartFile file , Model model ) {
-		service.createProduct(catname,nom,marque,description,file,"admin");
-		 return (this.AllProducts(model));
+		System.out.println("$$$$$$$$$$$$$$"+catname+nom+marque+description+file);
+		service.createProduct(catname,nom,marque,description,file,"ADMIN");
 		
+		 return "redirect:/admin/productlist";
 	}
 	@GetMapping("/delproduct/{id}")
 	public String DelProducts(@PathVariable("id") int id, Model model) {
 		service.deleteProductEntity(id);
-		return this.AllProducts(model);
+		return "redirect:/admin/productlist";
 	}
 	
 	@GetMapping("/updproduct/{id}")

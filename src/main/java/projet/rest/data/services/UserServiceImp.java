@@ -16,10 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import projet.rest.data.models.AvisEntity;
 import projet.rest.data.models.CategoryEntity;
+import projet.rest.data.models.ConfirmationToken;
 import projet.rest.data.models.ProductEntity;
 import projet.rest.data.models.UserEntity;
 import projet.rest.data.repositories.AvisRepository;
 import projet.rest.data.repositories.CategoryRepository;
+import projet.rest.data.repositories.ConfirmationTokenRepository;
 import projet.rest.data.repositories.ProductRepository;
 import projet.rest.data.repositories.UserRepository;
 
@@ -38,17 +40,19 @@ public class UserServiceImp implements UserService {
     private CategoryRepository reposCat ; 
     private ProductRepository reposProduct ; 
     private AvisRepository reposAvis ; 
-    
+    private ConfirmationTokenRepository repostoken;
     
     @Autowired
-    public UserServiceImp(UserRepository reposUser, CategoryRepository reposCat, ProductRepository reposProduit,
+    public UserServiceImp(ConfirmationTokenRepository repostoken,UserRepository reposUser, CategoryRepository reposCat, ProductRepository reposProduit,
             AvisRepository reposAvis) {
         super();
+        this.repostoken=repostoken;
         this.reposUser = reposUser;
         this.reposCat = reposCat;
         this.reposProduct = reposProduit;
         this.reposAvis = reposAvis;
     }
+    
     
     @Override
     public List<UserEntity> getAllUserEntity() {
@@ -382,6 +386,20 @@ Optional<AvisEntity> opt = reposAvis.findById(id);
             
         return this.modifyAvis(id, a);
     }
+
+
+	@Override
+	public void DelTokenByIdUser(double i ) {
+		// TODO Auto-generated method stub
+		
+		List<ConfirmationToken> tokens = repostoken.findAll();
+		for(ConfirmationToken t : tokens )
+		{
+			if(t.getUser().getId()==i)
+				repostoken.deleteById(t.getTokenid());
+		}}
+		
+	
     
     /*public AvisEntity addDisLike(int id , int userid) {
         AvisEntity a = this.getAvisById(id);

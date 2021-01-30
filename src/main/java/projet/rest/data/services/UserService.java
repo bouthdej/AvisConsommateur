@@ -41,5 +41,6 @@ public interface UserService {
     AvisEntity getAvisById( int id) ; 
     AvisEntity modifyAvis( int id , AvisEntity newEntityAvis);
     public AvisEntity addLike(int id , long userid);
+    public void DelTokenByIdUser(double i) ;
     //public AvisEntity addDisLike(int id , int userid);
 }

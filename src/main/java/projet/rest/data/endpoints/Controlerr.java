@@ -2,6 +2,7 @@ package projet.rest.data.endpoints;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -93,8 +94,19 @@ public class Controlerr {
 				
 		return "Other/productsnotfounds";}
 	}
-
-
+    @GetMapping("/add-review/{id}")
+	public String addReview(Model model,@PathVariable int id ) {
+    	if (CheckRole().equals("USER")) {
+	        return "redirect:/user/add-review/"+id;
+	    }
+		AvisEntity a = new AvisEntity() ;
+		model.addAttribute("avis",a);
+		ProductEntity p = service.getProductById(id);
+		model.addAttribute("product",p);
+		
+		return "Reviews/add-review";
+	}
+   
 	@GetMapping("/Contact")
 	public String Contact(Model model) {
 
