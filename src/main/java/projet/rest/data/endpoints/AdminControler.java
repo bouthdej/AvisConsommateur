@@ -4,11 +4,15 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +37,22 @@ import projet.rest.data.services.UserService;
 public class AdminControler {
 	@Autowired
 	UserService service ;
+	
+	public String CheckRole () {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	     
+		return authorities.toArray()[0].toString();
+	}
+	 
+    
 	@GetMapping("/home")
 	public String returnindexadmin() {
+		String myRole = CheckRole();
+	    if (myRole.equals("USER")||myRole.equals("NOTVERIFIED")) {
+	        return "redirect:/user/home";
+	    }
 	    return "admin/indexadmin";
 	}
 	

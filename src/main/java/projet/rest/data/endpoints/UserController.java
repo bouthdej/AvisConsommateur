@@ -40,6 +40,15 @@ public class UserController {
 	
 	@Autowired
 	SendEmailService SendEmailService;
+	
+	public String CheckRole () {
+		Collection<? extends GrantedAuthority> authorities;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    authorities = auth.getAuthorities();
+	     
+	    return authorities.toArray()[0].toString();
+	}
+	
 	public String getUserUsername() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username ;
@@ -60,11 +69,8 @@ public class UserController {
 
 	@GetMapping("/home")
 	public String userindex(Model model,RedirectAttributes redirAttrs) {
-		Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();		
-		if (myRole.equals("NOTVERIFIED")) 
+				
+		if (CheckRole().equals("NOTVERIFIED")) 
 			{
 			return "redirect:/logout";
 	    	}

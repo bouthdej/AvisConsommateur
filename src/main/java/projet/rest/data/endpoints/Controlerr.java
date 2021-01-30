@@ -39,17 +39,21 @@ public class Controlerr {
 	
 	@Autowired
     SendEmailService SendEmailService;
-	
-	@GetMapping("/")
-	public String returnindex(Model model) {
+	public String CheckRole () {
 		Collection<? extends GrantedAuthority> authorities;
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
-	    
-	    if (myRole.equals(user)) {
+	     
+	    return authorities.toArray()[0].toString();
+	}
+	@GetMapping("/")
+	public String returnindex(Model model) {
+ 
+	    if (CheckRole().equals("USER")) {
 	        return "redirect:/user/home";
+	    }
+	    else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 	    List <ProductEntity> products = service.getAllProduct();
 	    ProductEntity prod = new ProductEntity();
@@ -66,14 +70,12 @@ public class Controlerr {
 
     @GetMapping("/Products")
 	public String AllProducts(Model model ) { 
-    	Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
-	    
-	    if (myRole.equals(user)) {
+
+	    if (CheckRole().equals("USER")) {
 	        return "redirect:/user/Products";
+	    }
+	    else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 		List <ProductEntity> products = service.getAllProduct();
 		ProductEntity product = new ProductEntity();
@@ -95,14 +97,12 @@ public class Controlerr {
 
 	@GetMapping("/Contact")
 	public String Contact(Model model) {
-		Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
-	    
-	    if (myRole.equals(user)) {
+
+	    if (CheckRole().equals("USER")) {
 	        return "redirect:/user/Contact";
+	    }
+	    else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 	    return "Other/contact";
 	}
@@ -117,13 +117,12 @@ public class Controlerr {
 	
 	@GetMapping("/Login")
 	public String login() {
-		Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
-	    if (myRole.equals(user)) {
+
+	    if (CheckRole().equals("USER")) {
 	        return "redirect:/user/home";
+	    }
+	    else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 	    
 	    return "Other/login";
@@ -193,14 +192,12 @@ public class Controlerr {
 	
 	@RequestMapping("/default")
 	public String defaultAfterLogin() {
-	    Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
-	    
-	    if (myRole.equals(user)||myRole.equals("NOTVERIFIED")) {
+
+	    String myRole=CheckRole();
+	    if (myRole.equals("USER")||myRole.equals("NOTVERIFIED")) {
 	        return "redirect:/user/home";
+	    }else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 	    
 	    return "redirect:/admin/home";
@@ -208,14 +205,11 @@ public class Controlerr {
 	
 	@GetMapping("/Sign-up")
 	public String SignUp(Model model) {
-		Collection<? extends GrantedAuthority> authorities;
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    authorities = auth.getAuthorities();
-	    String myRole = authorities.toArray()[0].toString();
-	    String user = "USER";
 	    
-	    if (myRole.equals(user)) {
+	    if (CheckRole().equals("USER")) {
 	        return "redirect:/user/home";
+	    }else if (CheckRole().equals("ADMIN")) {
+	        return "redirect:/admin/home";
 	    }
 
 		UserEntity userentity = new UserEntity();

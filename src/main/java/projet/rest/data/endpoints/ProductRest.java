@@ -18,12 +18,8 @@ import projet.rest.data.models.ProductEntity;
 import projet.rest.data.models.UserEntity;
 import projet.rest.data.services.UserService;
 
- 
 
 @RestController
-
- 
-
 
 public class ProductRest {
     
