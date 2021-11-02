@@ -185,4 +185,12 @@ public class UserController {
 	    return "redirect:/Contact";
 	}
 
+	
+	@PostMapping("/report-review")
+	public String reportReview( ) {
+		
+		return ("Reviews/reportreview");
+	}
+	
+
 }
